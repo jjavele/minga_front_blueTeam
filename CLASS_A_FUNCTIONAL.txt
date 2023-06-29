@@ -1,0 +1,11 @@
+A lo largo de su evolución, React introdujo una nueva forma de escribir componentes utilizando funciones en lugar de clases. Este enfoque se conoce como componentes funcionales.
+
+Antes de la introducción de los componentes funcionales, la forma principal de definir componentes en React era a través de clases. Los componentes de clase tenían un ciclo de vida definido y permitían manejar el estado interno y las actualizaciones utilizando el método setState(). Sin embargo, el uso de clases para definir componentes podía resultar en código más verboso y difícil de mantener, especialmente en aplicaciones más grandes.
+
+Con la llegada de los Hooks en React (introducidos en React 16.8 en 2019), los componentes funcionales obtuvieron nuevas capacidades, como manejar el estado interno, acceder al ciclo de vida y utilizar características previamente reservadas para los componentes de clase.
+
+Los Hooks permiten a los componentes funcionales tener su propio estado mediante el uso del hook useState(), lo que eliminó la necesidad de convertir el componente en una clase solo para manejar el estado. Además, se introdujeron otros hooks, como useEffect(), para emular el ciclo de vida de los componentes de clase y realizar acciones en diferentes momentos, como montaje, actualización y desmontaje.
+
+La introducción de los componentes funcionales y los Hooks ha llevado a un cambio en la forma en que se escribe y organiza el código en React. Los componentes funcionales son más concisos y fáciles de entender, lo que facilita el desarrollo y el mantenimiento de aplicaciones. Además, los Hooks ofrecen una mayor flexibilidad y reutilización de la lógica entre componentes.
+
+Si bien los componentes de clase siguen siendo compatibles en React, se recomienda utilizar los componentes funcionales y los Hooks para desarrollar nuevas aplicaciones y migrar las existentes. Esto se debe a que proporcionan una sintaxis más moderna, mejor legibilidad y una forma más sencilla de trabajar con React.

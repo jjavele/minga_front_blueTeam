@@ -1,0 +1,31 @@
+1. ¿Qué es React?
+   React es una biblioteca de JavaScript que permite construir interfaces de usuario interactivas y reutilizables.
+
+2. ¿Qué es el DOM (Document Object Model)?
+   El DOM es una representación en forma de árbol de la estructura de un documento HTML. Permite acceder y manipular los elementos de la página.
+
+3. ¿Qué es el Virtual DOM en React?
+   El Virtual DOM es una representación virtual y ligera del DOM real. React lo utiliza para mejorar el rendimiento al actualizar selectivamente los cambios en el DOM real.
+
+4. ¿Qué significa SPA (Single Page Application)?
+   Una SPA es una aplicación web que se carga una sola vez en el navegador y proporciona una experiencia fluida al navegar por las diferentes secciones sin recargar la página.
+
+5. ¿Cómo funciona una SPA en React?
+   En una SPA con React, solo se carga una página HTML inicial. Luego, React maneja la actualización del contenido de la página mediante la manipulación del Virtual DOM y evita la recarga completa del navegador.
+
+6. ¿Qué es JSX en React?
+   JSX es una extensión de sintaxis en React que permite escribir código JavaScript con una sintaxis similar a HTML. Facilita la definición de componentes y su estructura.
+
+7. ¿Cómo se renderiza un componente en React?
+    Un componente en React se renderiza utilizando el método `ReactDOM.render()`, que especifica el componente que se desea renderizar y el contenedor donde se mostrará en el DOM.
+    
+//TODAVIA NO VIMOS
+
+8. ¿Qué es el enrutamiento en React?
+   El enrutamiento en React se refiere a la capacidad de cambiar la visualización de componentes en función de la URL actual. Se logra utilizando bibliotecas como React Router.
+
+9. ¿Qué es el ciclo de vida de un componente en React?
+   El ciclo de vida de un componente se refiere a las diferentes etapas que atraviesa desde su creación hasta su eliminación. Permite realizar acciones específicas en cada etapa, como la inicialización, actualización o eliminación de un componente.
+
+10. ¿Cuáles son algunos métodos del ciclo de vida en React?
+   Algunos métodos del ciclo de vida en React son: `componentDidMount()` (se ejecuta después de que un componente se monta en el DOM), `componentDidUpdate()` (se ejecuta después de que un componente se actualiza) y `componentWillUnmount()` (se ejecuta antes de que un componente se desmonte).

@@ -1,0 +1,13 @@
+El concepto de Virtual DOM (DOM virtual) es una técnica utilizada en React y otros frameworks de JavaScript para mejorar el rendimiento y la eficiencia en la actualización de la interfaz de usuario.
+
+El DOM (Document Object Model) es una representación estructurada en forma de árbol de todos los elementos HTML de una página web. Cuando se realiza un cambio en la aplicación, ya sea en los datos o en el estado, es necesario actualizar el DOM para reflejar esos cambios y mostrar la interfaz de usuario actualizada.
+
+Sin embargo, actualizar directamente el DOM puede ser costoso en términos de rendimiento, especialmente cuando se realizan múltiples cambios o actualizaciones frecuentes en la interfaz de usuario. Aquí es donde entra en juego el Virtual DOM.
+
+El Virtual DOM es una representación liviana y virtual del DOM real. Es una copia de la estructura del árbol de elementos del DOM que React utiliza internamente para realizar comparaciones y determinar de manera eficiente qué partes del DOM deben actualizarse.
+
+Cuando se realiza un cambio en la aplicación en React, en lugar de actualizar directamente el DOM, React actualiza primero el Virtual DOM. Luego, compara la versión anterior del Virtual DOM con la nueva versión y determina los cambios exactos que deben realizarse en el DOM real.
+
+Esta comparación eficiente se basa en algoritmos de reconciliación que identifican las diferencias mínimas necesarias para actualizar el DOM. Una vez que se determinan los cambios necesarios, React actualiza solo esas partes específicas del DOM real, lo que resulta en una mejora significativa del rendimiento en comparación con una actualización completa del DOM.
+
+El Virtual DOM también facilita la escritura de componentes más declarativos en React. En lugar de manipular directamente el DOM, los componentes en React se definen en función del estado y las propiedades, y React se encarga de actualizar el DOM en consecuencia.

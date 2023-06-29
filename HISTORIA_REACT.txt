@@ -1,0 +1,9 @@
+React fue creado por Jordan Walke, un ingeniero de software de Facebook, y fue presentado al público por primera vez en 2013. La motivación detrás del desarrollo de React fue abordar los desafíos y las necesidades de rendimiento que surgieron al construir aplicaciones web complejas en Facebook.
+
+Inicialmente, React fue utilizado internamente en Facebook para mejorar la eficiencia y el rendimiento de su plataforma. Luego, en 2013, se lanzó como una biblioteca de código abierto para que otros desarrolladores pudieran aprovechar sus beneficios.
+
+La principal innovación de React fue la introducción del Virtual DOM (DOM virtual), que es una representación liviana del DOM real. React utiliza el Virtual DOM para comparar y actualizar selectivamente los cambios en el DOM real, lo que resulta en una mejor eficiencia y rendimiento al minimizar las manipulaciones directas del DOM.
+
+A lo largo de los años, React ha experimentado un crecimiento significativo y se ha convertido en una de las bibliotecas más populares para el desarrollo de interfaces de usuario en JavaScript. Su enfoque en la creación de componentes reutilizables y su capacidad para construir aplicaciones de una sola página (SPA) han sido fundamentales para su adopción y éxito en la comunidad de desarrollo web.
+
+Además, React cuenta con una amplia comunidad de desarrolladores que contribuyen con componentes, herramientas y recursos para facilitar su uso y expansión. Facebook sigue siendo uno de los principales impulsores y patrocinadores de React, y la biblioteca continúa evolucionando y mejorando con nuevas características y actualizaciones regulares.
