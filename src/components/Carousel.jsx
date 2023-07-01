@@ -36,24 +36,24 @@ export default function Carousel() {
   const { character_photo, cover_photo, description, name } = currentCategory;
 
   return (
-    <div className="hidden lg:flex justify-center items-center w-full h-[100%]">
-      <div className="flex text-white w-[90%] h-[25rem] rounded-md bg-[linear-gradient(45deg,#4338CA_0%,#5E52F3_100%)] justify-around gap-[15px] items-center p-2">
+    <div className="hidden lg:flex justify-center items-center w-full lg:h-[40vh]">
+      <div className="flex text-white w-[90%] lg:h-[30vh] rounded-md bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  justify-between items-center p-2">
         <Arrow icon={iconLeft} onClick={prev} />
         <img
-          className="h-[25rem] w-[20rem] relative bottom-[5rem]"
+          className="h-[25vh]"
           src={categories[counter].character_photo}
           alt="footer-1"
         />
         <img
-          className="h-[20rem] w-[14rem] relative bottom-[7rem]"
+          className="h-[30vh] mb-[5vh]"
           src={categories[counter].cover_photo}
           alt="footer-2"
         />
-        <div className="flex flex-col w-[40%] gap-4 ms-3">
+        <div className="flex flex-col w-[30vw] gap-4 ms-3">
           <p className="w-[90%] text-[3rem] capitalize">
             {categories[counter].name}:
           </p>
-          <p className="w-[90%] text-[1rem] capitalize-first">
+          <p className="w-[30vw] text-[1rem] capitalize-first">
             {categories[counter].description}
           </p>
         </div>
