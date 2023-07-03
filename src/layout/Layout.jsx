@@ -1,12 +1,15 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
+import Welcome from "../components/Welcome";
+import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 export default function Layout() {
   return (
     <>
-      <div className="bg-[url('/src/assets/images/backgroundmanga.png')] h-screen w-full bg-cover lg:bg-[url('/src/assets/images/background.png')] lg:h-[60vh] lg:w-full lg:bg-center">
+      <div>
         <Navbar />
         <Outlet />
         <Footer />
