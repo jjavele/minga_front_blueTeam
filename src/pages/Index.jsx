@@ -1,3 +1,4 @@
+/*
 import React from "react";
 
 export default function Index() {
@@ -7,3 +8,4 @@ export default function Index() {
     </main>
   );
 }
+*/
