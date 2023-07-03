@@ -5,7 +5,7 @@ export default function Footer() {
     <footer>
       <div>
         <img
-          className="rounded-[0px_0px_50%_50%]"
+          className="rounded-[0px_0px_50%_50%] h-[30vh] w-full"
           src="./src/assets/images/gohanvidel.png"
           alt="gohan videl goten trunks"
         />

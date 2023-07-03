@@ -3,7 +3,7 @@ import ButtonWelcome from "./ButtonWelcome"
 
 export default function Welcome() {
   return (
-    <div className="flex h-screen justify-center items-center flex-col">
+    <div className="flex lg:h-[60vh] h-screen justify-center items-center flex-col">
         <h1 className="text-white text-3xl mb-3 text-center md:m-10 md:text-5xl lg:m-0">
           Your favorite comic book store
         </h1>

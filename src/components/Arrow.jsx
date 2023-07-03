@@ -7,7 +7,7 @@ export default function Arrow({ icon, onClick }) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-14 h-14"
+      className="w-10 h-10"
     >
       <path strokeLinecap="round" strokeLinejoin="round" d={icon} />
     </svg>
