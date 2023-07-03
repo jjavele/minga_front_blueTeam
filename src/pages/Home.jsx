@@ -10,8 +10,9 @@ export default function Layout() {
     <>
       <div>
         <Navbar />
+        <Welcome />
         <Outlet />
-        <Footer />
+        <Carousel />
       </div>
     </>
   );
