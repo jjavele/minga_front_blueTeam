@@ -6,22 +6,29 @@ import Layout from '../layout/Layout';
 import Home from "./Home";
 import {Navigate} from 'react-router-dom'
 import { useParams, useNavigate} from 'react-router-dom'
+import NotAllow from './NotAllow';
 
 
 export default function ChapterForm () {
 
-  let {manga_id} = useParams()
-  console.log(manga_id)
-  let [chapter, setChapter] = useState([]);
-  //SI ESTUVIESE USANDO EN VEZ DE UNA VARIABLE LOCAL UN ESTADO, SE RE-RENDERIZARÍA.
+  let id = useParams()
+    // console.log(id.id_manga);
+    let title = useRef()
+    let order = useRef()
+    let pages = useRef()
+    let navigate = useNavigate()
 
-  async function getData() {
-    try {
-      let { data } = await api.get("http://localhost:8080/api/chapters/");
-      setChapter(data.find(manga=> manga.id == _id));
-    } catch (error) {
-      console.log(error);
-    }
+
+  function handleForm(e) {
+    e.preventDefault()
+    let array = pages.current.value
+    let listpage = array.split(",")
+    let data = {
+      manga_id: id.id_manga,
+      title: title.current.value,
+      order: order.current.value,
+      pages: listpage
+    }      
   }
 
   /*
@@ -32,8 +39,6 @@ export default function ChapterForm () {
   let navigate = useNavigate()
   */
 
-
-  
   let user = JSON.parse(localStorage.getItem('user1'))
   let role = user.role;
   let online = user.online
@@ -74,7 +79,7 @@ export default function ChapterForm () {
       </div>
     )}  else if(online == false || role != 1 || role != 2) {
           return (
-            <Navigate to={"/"}/>
+            <NotAllow/>
           )
         }         
 }
