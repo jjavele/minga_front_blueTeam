@@ -11,7 +11,9 @@ export default function Drawer({ isOpen, setIsOpen }) {
               <div className='flex flex-col ms-3'>
                   <p className='text-[14px]'>mail@gmail.com</p>
               </div>
-                <img src="/src/assets/images/filled.svg" onClick={() => setIsOpen(!isOpen)} className='hidden sm:block ms-[20%] w-[24px] h-[24px]' />
+
+                <img src="/src/assets/images/filled.svg" onClick={() => setIsOpen(!isOpen)} className='hidden sm:block ms-[20%] w-[24px] h-[24px] hoover:' />
+
             </div>
             <div className='lg:text-lg'>
                   <p className='p-3  bg-[#ffffff] text-[#4338CA] w-[250px] sm:w-[400px] rounded-md'>Home</p>
