@@ -37,10 +37,12 @@ export default function Carousel() {
 
   return (
     <div className="hidden lg:flex justify-center items-center w-full lg:h-[40vh]">
-      <div className="flex text-white w-[90%] lg:h-[30vh] rounded-md bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  justify-between items-center p-2">
+
+      <div className="flex text-white w-[90%] lg:h-[30vh] rounded-md bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  justify-between items-center ">
         <Arrow icon={iconLeft} onClick={prev} />
         <img
-          className="h-[25vh]"
+          className="h-[35vh] self-end"
+
           src={categories[counter].character_photo}
           alt="footer-1"
         />
