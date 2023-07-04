@@ -21,7 +21,7 @@ export default function SignIn() {
     <>
       <div className="flex h-[100vh]">
         <div className="w-[45vw] bg-[url('/src/assets/images/signin.png')] bg-cover hidden md:block "></div>
-        <section className="flex flex-col w-[100vw] md:w-[55vw] mb-[11rem] justify-center items-center ">
+        <section className="flex flex-col w-[100vw] md:w-[55vw]  justify-center items-center ">
           <img src="/src/assets/images/minga.png" alt="" />
           <h1 className="text-3xl font-bold">
             Welcome <span className="text-blue-500">back</span>!
