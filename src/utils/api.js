@@ -4,4 +4,5 @@ export const api = axios.create({baseUrl: apiUrl})
 export const endpoints = {
     read_equipos: "equipos/read",
     sign_in: "signin",
+    chapter_form: "chapter-form",
 }
