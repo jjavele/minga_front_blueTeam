@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
+import { Link } from "react-router-dom";
 export default function SignIn() {
   let inputEmail = useRef("");
   let inputPassword = useRef("");
@@ -64,12 +65,14 @@ export default function SignIn() {
               className="p-3  border-4 w-[25vw] h-[5vh] rounded-lg"
             />
 
-            <button
+            <Link
+              to="/"
+              name="Sign In"
               type="submit"
-              className="mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white  font-bold text-lg"
+              className="mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
             >
               Sign In
-            </button>
+            </Link>
 
             <div className=" flex items-center justify-center p-3 mt-4 border-4 w-[25vw] h-[5vh] rounded-lg">
               <img
