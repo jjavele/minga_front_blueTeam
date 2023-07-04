@@ -4,6 +4,7 @@ import { Layout, SignIn, ChapterForm } from "./index";
 import Home from "../pages/Home"
 import NotAllow from "../pages/NotAllow";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
         element: <SignIn />,
       },
       {
-        path: "/chapter-form",
+        path: "/:manga_id/chapter-form",
         element: <ChapterForm/>,
       },
       {
