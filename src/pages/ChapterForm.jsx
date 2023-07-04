@@ -28,7 +28,26 @@ export default function ChapterForm () {
       title: title.current.value,
       order: order.current.value,
       pages: listpage
-    }      
+    }
+    // console.log(listpage);
+
+
+    axios.post(apiUrl + 'chapters', data, headers)
+      .then(res => {
+        console.log(res)
+        navigate('/')
+        Swal.fire({
+          icon: 'success',
+          title: 'Chapter successfully!',
+        })
+      })
+      .catch(error => {
+        const err = error.response.data.message
+        Swal.fire({
+          icon: 'error',
+          title: err,
+        })
+    })       
   }
 
   /*
