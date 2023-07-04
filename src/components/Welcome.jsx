@@ -3,7 +3,7 @@ import ButtonWelcome from "./ButtonWelcome"
 
 export default function Welcome() {
   return (
-    <div className="flex lg:h-[60vh] h-screen justify-center items-center flex-col">
+    <div className="flex h-[100vh] bg-[url('/src/assets/images/backgroundmanga.png')] w-full bg-cover justify-center items-center flex-col lg:bg-[url('/src/assets/images/background.png')] lg:h-[60vh] lg:w-full lg:bg-top">
         <h1 className="text-white text-3xl mb-3 text-center md:m-10 md:text-5xl lg:m-0">
           Your favorite comic book store
         </h1>
@@ -14,8 +14,11 @@ export default function Welcome() {
         <p className="text-white text-sm p-2 mb-3 text-center md:text-xl lg:text-1xl lg:m-4">
           Explore our catalog and live the adventure of your life.
         </p>
-        <ButtonWelcome/>
+        <ButtonWelcome name="Let's Go!" to={"/signin"}/>
         
       </div>
   )
 }
+/*
+className="bg-[url('/src/assets/images/backgroundmanga.png')] h-[60vh] w-full bg-cover lg:bg-[url('/src/assets/images/background.png')] lg:h-[60vh] lg:w-full lg:bg-center"
+*/
