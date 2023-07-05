@@ -42,11 +42,11 @@ export default function Drawer({ isOpen, setIsOpen }) {
               Home
             </p>
           </Anchor>
-          <Anchor to="/">
+         { !token && <Anchor to="/register">
             <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
               Register
             </p>
-          </Anchor>
+          </Anchor>}
           {!token && (
             <Anchor to="/login">
               <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
@@ -60,7 +60,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
               <Anchor to="/manga-form">
                 {" "}
                 <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
-                  Naw Manga
+                  New Manga
                 </p>
               </Anchor>
               <Anchor to="/:manga_id/chapter-form">

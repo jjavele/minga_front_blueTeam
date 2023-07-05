@@ -1,11 +1,19 @@
 import React from "react";
 import ButtonForm from "../components/ButtonForm";
+import Swal from "sweetalert2";
 
 export default function Register() {
+  
+  const handlerbutton = () => {
+    Swal.fire({
+      icon: "success",
+      title: "User registered successfully!",
+    });
+  };
 
   return (
     <div className="h-screen w-full flex">
-      <div className="h-screen w-[50vw] flex flex-col items-center">
+      <div className="h-screen w-[100vw] md:w-[50vw] flex flex-col items-center">
         <div className="flex flex-col items-center text-center mt-[4rem]">
           <img
             className="w-[11rem] mb-1"
@@ -23,7 +31,7 @@ export default function Register() {
           <input
             type="text"
             placeholder="example@outlook.com"
-            className="p-3 mb-1 border-2 border-black w-[25vw] h-[40px] rounded-lg"
+            className="p-3 mb-1 border-2 border-black w-[75vw] md:w-[25vw] h-[40px] rounded-lg"
           />
         </div>
         <div>
@@ -31,15 +39,15 @@ export default function Register() {
           <input
             type="text"
             placeholder="Url"
-            className="p-3 mb-1 border-2 border-black w-[25vw] h-[40px] rounded-lg"
+            className="p-3 mb-1 border-2 border-black w-[75vw] md:w-[25vw] h-[40px] rounded-lg"
           />
         </div>
         <div>
           <legend className="text-sm">Password</legend>
           <input
-            type="text"
+            type="password"
             placeholder="6-15 characters"
-            className="p-3 mb-1 border-2 border-black w-[25vw] h-[40px] rounded-lg"
+            className="p-3 mb-1 border-2 border-black w-[75vw] md:w-[25vw] h-[40px] rounded-lg"
           />
         </div>
         <div className="flex">
@@ -48,12 +56,12 @@ export default function Register() {
           email
         </label>
         </div>
-        <ButtonForm text="Sign up" />
-        <div className=" flex items-center justify-center p-3 mt-[1rem] border-2 border-black w-[25vw] h-[3rem] rounded-lg">
+        <ButtonForm onClick={handlerbutton} text="Sign up" />
+        <div className="flex items-center justify-center p-3 mt-[1rem] border-2 border-black w-[75vw] md:w-[25vw] h-[3rem] rounded-lg">
           <img
             src="/src/assets/images/signup.png"
             alt=""
-            className="h-[4vh] "
+            className="h-[4vh]"
           />
         </div>
         <div className="text-center">
@@ -71,7 +79,7 @@ export default function Register() {
           </p>
         </div>
       </div>
-      <div>
+      <div className="hidden md:block">
         <img
           className="h-screen w-[50vw]"
           src="./src/assets/images/registerback.png"
