@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
 
-import { Layout, Login, ChapterForm } from "./index";
+import { Layout, Login, ChapterForm, MangaForm } from "./index";
 import Home from "../pages/Home"
 import NotAllow from "../pages/NotAllow";
+
 
 
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <NotAllow />
+      },
+      {
+        path: "/manga-form",
+        element: <MangaForm />
       }
     ],
   },
