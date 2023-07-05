@@ -1,11 +1,14 @@
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
+
+
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link as Anchor } from "react-router-dom";
+
 export default function SignIn() {
   let inputEmail = useRef("");
   let inputPassword = useRef("");
-
+  const navigate = useNavigate();
   async function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -15,19 +18,19 @@ export default function SignIn() {
     };
     try {
       let { data } = await api.post(apiUrl + endpoints.sign_in, datos);
+      const token = data.response?.token;
       localStorage.setItem("token", data.response?.token);
       localStorage.setItem("user", JSON.stringify(data.response?.user));
 
+      navigate("/");
       console.log(data);
+      console.log(token);
     } catch (error) {
       console.log(error);
     }
   }
-  console.log()
-  const navigate = useNavigate();
-  /*const handleButtonClick = () => {
-    navigate("/");
-  };*/
+
+  console.log("hola");
   return (
     <>
       <div className="flex h-[100vh]">
@@ -70,13 +73,15 @@ export default function SignIn() {
               className="p-3  border-4 w-[25vw] h-[5vh] rounded-lg"
             />
 
+
             <div>
-                <input
-                  type="submit"
-                  value="Sign In"
-                  className="cursor-pointer mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
-                />
+              <input
+                type="submit"
+                value="signin"
+                className="cursor-pointer mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
+              />
             </div>
+
 
             <div className=" flex items-center justify-center p-3 mt-4 border-4 w-[25vw] h-[5vh] rounded-lg">
               <img
@@ -93,6 +98,7 @@ export default function SignIn() {
           <Anchor to="/" className="mt-3">
             Go back to <span className="text-blue-500">home page</span>
           </Anchor>
+          =
         </section>
       </div>
     </>

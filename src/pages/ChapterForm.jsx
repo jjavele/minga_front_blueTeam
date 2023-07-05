@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRef } from "react";
-//import { api, apiUrl, endpoints } from "../utils/api";
+import { api, apiUrl, endpoints } from "../utils/api";
 import Alert from '../components/Alert';
 import Layout from '../layout/Layout';
 import Home from "./Home";

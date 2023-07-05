@@ -44,6 +44,7 @@ export default function Carousel() {
           className="h-[35vh] self-end"
 
 
+
           src={categories[counter].character_photo}
           alt="footer-1"
         />

@@ -2,9 +2,10 @@
 import React from "react";
 import { Link as Anchor } from "react-router-dom";
 
-const isLoggedIn =
-  localStorage.getItem("token") && localStorage.getItem("user");
 export default function ButtonWelcome({ name }) {
+  const isLoggedIn =
+    localStorage.getItem("token") && localStorage.getItem("user");
+
   return (
     <div className="flex justify-center">
       {isLoggedIn ? (
