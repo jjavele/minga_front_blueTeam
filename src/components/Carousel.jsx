@@ -32,8 +32,8 @@ export default function Carousel() {
     return null;
   }
 
-  const currentCategory = categories[counter];
-  const { character_photo, cover_photo, description, name } = currentCategory;
+  // const currentCategory = categories[counter];
+  // const { character_photo, cover_photo, description, name } = currentCategory;
 
   return (
     <div className="hidden lg:flex justify-center items-center w-full lg:h-[40vh]">

@@ -48,7 +48,7 @@ export default function SignIn() {
             <fieldset>
               <legend
                 className="self-start mt-15 h-2 relative z-10 bg-white ms-5"
-                for="email"
+                htmlFor="email"
               >
                 Email
               </legend>
