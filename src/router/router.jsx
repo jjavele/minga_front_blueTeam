@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         path: "/manga-form",
         element: <MangaForm />
       },
-  {
+      {
         path: "/login",
         element: <Login />,
       },
