@@ -1,22 +1,3 @@
-import React from 'react'
-import { useRef } from "react";
-import { api, apiUrl, endpoints } from "../utils/api";
-
-export default function ChapterForm () {
-  return (
-    <>
-        <div className="flex w-[50vw] h-[100vh] ">
-
-        </div>
-        <div className="flex w-[50vw] h-[100vh] bg-[url('/src/assets/images/background-chapterform')] ">
-
-        </div>
-
-
-    </>
-  )
-}
-
 import React, { useState } from 'react'
 import { useRef } from "react";
 //import { api, apiUrl, endpoints } from "../utils/api";
@@ -41,35 +22,34 @@ export default function ChapterForm () {
     let pages = useRef()
     let navigate = useNavigate()
 
+    function handleForm(element) {
+      element.preventDefault()
+      let array = pages.current.value
+      let listpage = array.split(",")
+      let data = {
+        manga_id: id.manga_id,
+        title: title.current.value,
+        order: order.current.value,
+        pages: listpage
+      }
+      console.log(listpage);
 
-  function handleForm(element) {
-    element.preventDefault()
-    let array = pages.current.value
-    let listpage = array.split(",")
-    let data = {
-      manga_id: id.manga_id,
-      title: title.current.value,
-      order: order.current.value,
-      pages: listpage
-    }
-    console.log(listpage);
-
-    axios.post("http://localhost:8080/api/chapters/register", data)
-      .then(res => {
-        console.log(res)
-        navigate('/')
-        Swal.fire({
-          icon: 'success',
-          title: 'Chapter upload successfully!',
+      axios.post("http://localhost:8080/api/chapters/register", data)
+        .then(res => {
+          console.log(res)
+          navigate('/')
+          Swal.fire({
+            icon: 'success',
+            title: 'Chapter upload successfully!',
+          })
         })
-      })
-      .catch(error => {
-        const err = error.response.data.message
-        Swal.fire({
-          icon: 'error',
-          title: err,
-        })
-    })       
+        .catch(error => {
+          const err = error.response.data.message
+          Swal.fire({
+            icon: 'error',
+            title: err,
+          })
+      })       
   }
 
   /*
