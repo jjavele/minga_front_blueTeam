@@ -4,4 +4,4 @@ export { default as Login } from '../pages/Login'
 //export { default as SignIn } from '../pages/SignIn'
 export { default as ChapterForm } from "../pages/ChapterForm"
 
-
+export { default as Register } from "../pages/Register"
