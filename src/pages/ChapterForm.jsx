@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
-import Alert from '../components/Alert';
+//import Alert from '../components/Alert';
 import Layout from '../layout/Layout';
 import Home from "./Home";
 //import {Navigate} from 'react-router-dom'
@@ -40,7 +40,7 @@ export default function ChapterForm () {
         navigate('/')
         Swal.fire({
           icon: 'success',
-          title: 'Chapter successfully!',
+          title: 'Chapter upload successfully!',
         })
       })
       .catch(error => {
