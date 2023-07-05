@@ -67,7 +67,7 @@ export default function Register() {
         <div className="text-center">
           <p className="mt-3">
             Already have an acount?{" "}
-            <a href="#" className="text-blue-700">
+            <a href="/login" className="text-blue-700">
               Log in
             </a>
           </p>
