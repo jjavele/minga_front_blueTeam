@@ -12,7 +12,9 @@ export default function Drawer({ isOpen, setIsOpen }) {
                   <p className='text-[14px]'>mail@gmail.com</p>
               </div>
 
+
                 <img src="/src/assets/images/filled.svg" onClick={() => setIsOpen(!isOpen)} className='hidden sm:block ms-[20%] w-[24px] h-[24px] hoover:' />
+
 
             </div>
             <div className='lg:text-lg'>

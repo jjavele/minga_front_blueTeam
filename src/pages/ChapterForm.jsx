@@ -1,6 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
+
+export default function ChapterForm () {
+  return (
+    <>
+        <div className="flex w-[50vw] h-[100vh] ">
+
+        </div>
+        <div className="flex w-[50vw] h-[100vh] bg-[url('/src/assets/images/background-chapterform')] ">
+
+        </div>
+
+
+    </>
+  )
+}
+
+import React, { useState } from 'react'
+import { useRef } from "react";
+//import { api, apiUrl, endpoints } from "../utils/api";
 import Alert from '../components/Alert';
 import Layout from '../layout/Layout';
 import Home from "./Home";
@@ -131,5 +150,4 @@ export default function ChapterForm () {
             </div>
           </div>
         </div>*/
-
-
+        
