@@ -4,3 +4,4 @@ export { default as ChapterForm } from "../pages/ChapterForm"
 export { default as MangaForm } from "../pages/MangaForm"
 
 
+export { default as Register } from "../pages/Register"

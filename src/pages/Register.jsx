@@ -1,104 +1,83 @@
-import { useRef } from "react";
-import { api, apiUrl, endpoints } from "../utils/api";
+import React from "react";
+import ButtonForm from "../components/ButtonForm";
+
 export default function Register() {
-  let inputEmail = useRef("");
-  let inputPassword = useRef("");
-  async function handleFormSubmit(event) {
-    event.preventDefault();
-    let datos = {
-      email: inputEmail.current.value,
-      contraseña: inputPassword.current.value,
-    };
-    try {
-      let { data } = await api.post(apiUrl + endpoints.sign_in, datos);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
   return (
-    <>
-      <div className="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8 bg-[#f7f7f7]">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="h-screen w-full flex">
+      <div className="h-screen w-[50vw] flex flex-col items-center">
+        <div className="flex flex-col items-center text-center mt-[4rem]">
           <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
+            className="w-[11rem] mb-1"
+            src="./src/assets/images/minga.png"
+            alt=""
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#333]">
-            Sign in to your account
-          </h2>
+          <h1 className="text-2xl font-bold">Welcome!</h1>
+          <p className="w-[27rem] mb-[1rem]">
+            Discover manga, manhua and manhwa, track your progress, have fun,
+            read manga.
+          </p>
         </div>
-        <div className="w-1/2 min-h-1/2 p-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <form
-              onSubmit={handleFormSubmit}
-              className="space-y-6 focus:outline-none focus:border-none focus:ring-0"
-              action="#"
-              method="POST"
-            >
-              <div className="h-fit rounded-lg w-full flex flex-col bg-white border border-gray-300 shadow-sm">
-                <input
-                  ref={inputEmail}
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="focus:outline-none focus:border-none focus:ring-0 px-4 placeholder:text-base rounded-t-lg block w-full rounded-none  placeholder:px-28 border-none py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                  placeholder="Email address"
-                />
-                <hr className="border-gray-200" />
-                <input
-                  ref={inputPassword}
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  placeholder="Password"
-                  className="focus:outline-none focus:border-none focus:ring-0 px-4 placeholder:text-base rounded-b-lg block w-full rounded-none border-none py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                />
-              </div>
-
-              <div className="flex justify-between">
-                <fieldset className="flex gap-2 items-center">
-                  <input
-                    className="rounded-lg accent-[#333] w-4 h-4 focus:ring-[#333] focus:ring-2 p-2 ring-offset-2 focus:rounded-xl"
-                    type="checkbox"
-                    name="remember"
-                    id="remember"
-                  />
-                  <label className="text-sm text-gray-700" htmlFor="remember">
-                    Remember me
-                  </label>
-                </fieldset>
-                <p className="cursor-pointer font-semibold text-[#333] hover:text-[#555] text-sm">
-                  Forgot password?
-                </p>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-gradient-to-t from-black to-[#444]  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#333]"
-                >
-                  Sign in
-                </button>
-              </div>
-            </form>
-
-            <p className="mt-10 text-center text-sm text-gray-500">
-              Not a member?<br></br>
-              <a
-                href="#"
-                className="font-semibold leading-6 text-[#333] hover:text-indigo-500"
-              >
-                Start a 14 day free trial
-              </a>
-            </p>
-          </div>
+        <div>
+          <legend className="text-sm">Email</legend>
+          <input
+            type="text"
+            placeholder="example@outlook.com"
+            className="p-3 mb-1 border-2 border-black w-[25vw] h-[40px] rounded-lg"
+          />
+        </div>
+        <div>
+          <legend className="text-sm">Photo</legend>
+          <input
+            type="text"
+            placeholder="Url"
+            className="p-3 mb-1 border-2 border-black w-[25vw] h-[40px] rounded-lg"
+          />
+        </div>
+        <div>
+          <legend className="text-sm">Password</legend>
+          <input
+            type="text"
+            placeholder="6-15 characters"
+            className="p-3 mb-1 border-2 border-black w-[25vw] h-[40px] rounded-lg"
+          />
+        </div>
+        <div className="flex">
+        <label>
+          <input type="checkbox" id="miCheckbox" /> Send notification to my
+          email
+        </label>
+        </div>
+        <ButtonForm text="Sign up" />
+        <div className=" flex items-center justify-center p-3 mt-[1rem] border-2 border-black w-[25vw] h-[3rem] rounded-lg">
+          <img
+            src="/src/assets/images/signup.png"
+            alt=""
+            className="h-[4vh] "
+          />
+        </div>
+        <div className="text-center">
+          <p className="mt-3">
+            Already have an acount?{" "}
+            <a href="#" className="text-blue-700">
+              Log in
+            </a>
+          </p>
+          <p className="mt-3">
+            Go back to{" "}
+            <a href="#" className="text-blue-700">
+              home page
+            </a>
+          </p>
         </div>
       </div>
-    </>
+      <div>
+        <img
+          className="h-screen w-[50vw]"
+          src="./src/assets/images/registerback.png"
+          alt=""
+        />
+      </div>
+    </div>
   );
 }

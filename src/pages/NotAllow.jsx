@@ -5,7 +5,7 @@ export default function NotAllow() {
   const consolasFont = {
     fontFamily: "Consolas, mono",
   };
-
+  
   return (
     <div className="h-[100vh] w-full flex justify-center items-center">
       <div className="bg-violet-400 h-[70vh] w-[50rem] flex justify-start items-center flex-col p-6 border-black border-2 rounded-3xl">
