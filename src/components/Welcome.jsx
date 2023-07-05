@@ -14,7 +14,7 @@ export default function Welcome() {
         <p className="text-white text-sm p-2 mb-3 text-center md:text-xl lg:text-1xl lg:m-4">
           Explore our catalog and live the adventure of your life.
         </p>
-        <ButtonWelcome/>
+        <ButtonWelcome name="Let's Go!" to={"/signin"}/>
         
       </div>
   )

@@ -4,6 +4,12 @@ import { createBrowserRouter } from "react-router-dom";
 import { Layout, Login, ChapterForm } from "./index";
 import Home from "../pages/Home";
 
+
+import NotAllow from "../pages/NotAllow";
+
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,13 +20,26 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
-        element: <Login />,
-      },
+
       {
         path: "/chapter-form",
         element: <ChapterForm />,
       },
+
+
+        path: "/login",
+        element: <Login />,
+      },
+
+      {
+        path: "/:manga_id/chapter-form",
+        element: <ChapterForm/>,
+      },
+      {
+        path: "*",
+        element: <NotAllow/>
+      }
+
     ],
   },
 ]);

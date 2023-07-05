@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link as Anchor } from "react-router-dom";
 
@@ -23,4 +24,3 @@ export default function ButtonWelcome({ name }) {
       )}
     </div>
   );
-}
