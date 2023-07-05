@@ -48,7 +48,7 @@ export default function SignIn() {
             <fieldset>
               <legend
                 className="self-start mt-15 h-2 relative z-10 bg-white ms-5"
-                for="email"
+                htmlFor="email"
               >
                 Email
               </legend>
@@ -92,13 +92,12 @@ export default function SignIn() {
             </div>
           </form>
           <Anchor to="/register" className="mt-3">
-            you don't have an account yet?{" "}
+            You don't have an account yet?{" "}
             <span className="text-blue-500">Sign up</span>
           </Anchor>
           <Anchor to="/" className="mt-3">
             Go back to <span className="text-blue-500">home page</span>
           </Anchor>
-          =
         </section>
       </div>
     </>
