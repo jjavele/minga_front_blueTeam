@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Link as Anchor } from "react-router-dom";
 export default function Drawer({ isOpen, setIsOpen }) {
@@ -64,7 +63,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
                   Naw Manga
                 </p>
               </Anchor>
-              <Anchor to="/chapter-form">
+              <Anchor to="/:manga_id/chapter-form">
                 <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
                   New Chapter
                 </p>

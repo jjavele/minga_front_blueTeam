@@ -34,13 +34,13 @@ export default function ChapterForm () {
       }
       console.log(listpage);
 
-      axios.post("http://localhost:8080/api/chapters/register", data)
+      axios.post("http://localhost:8080/api/chapters/register", data, headers)
         .then(res => {
           console.log(res)
           navigate('/')
           Swal.fire({
             icon: 'success',
-            title: 'Chapter upload successfully!',
+            title: 'Chapter uploaded successfully!',
           })
         })
         .catch(error => {
@@ -52,37 +52,22 @@ export default function ChapterForm () {
       })       
   }
 
-  /*
-  let id = useParams()
-  let title = useRef()
-  let order = useRef()
-  let pages = useRef()
-  let navigate = useNavigate()
-  */
   
+  /*
   let user = JSON.parse(localStorage.getItem('user1'))
   let role = user.role;
   let online = user.online
-  
-  /*
-  let role = localStorage.getItem('role')
-  let onlie = localStorage.getItem('online')
-
+  */
   /*
   let role = 1;
   let online = true;
   */
-  
-  /*
-  const [show, setShow ] = useState(true);
-  */
-  /*
-  let role = localStorage.getItem('role')
+  let user = JSON.parse(localStorage.getItem('user'))
+  let role = user?.role || 0
   let token = localStorage.getItem('token')
   let headers = { headers: { 'Authorization': `Bearer ${token}` } }
-  */
 
-  if(online == true && role == 1 || role == 2){
+  if(role == 1 || role == 2){
     return (
       <div className="flex h-[100vh] ">
         <div className="w-[45vw] bg-[url('/src/assets/images/background-chapterform.png')] bg-cover hidden md:block">
@@ -103,7 +88,7 @@ export default function ChapterForm () {
             </form>              
         </section>
       </div>
-    )}  else if(online == false || role != 1 || role != 2) {
+    )}  else {
           return (
             <NotAllow/>
           )
