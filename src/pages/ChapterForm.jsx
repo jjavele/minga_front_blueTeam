@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
-//import Alert from '../components/Alert';
+import Alert from '../components/Alert';
 import Layout from '../layout/Layout';
 import Home from "./Home";
 //import {Navigate} from 'react-router-dom'
@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 
 export default function ChapterForm () {
 
+  let [show, setShow] = useState(true)
+
   let id = useParams()
     console.log(id.manga_id);
     let title = useRef()
@@ -21,8 +23,8 @@ export default function ChapterForm () {
     let navigate = useNavigate()
 
 
-  function handleForm(e) {
-    e.preventDefault()
+  function handleForm(element) {
+    element.preventDefault()
     let array = pages.current.value
     let listpage = array.split(",")
     let data = {
@@ -32,7 +34,6 @@ export default function ChapterForm () {
       pages: listpage
     }
     console.log(listpage);
-
 
     axios.post("http://localhost:8080/api/chapters/register", data)
       .then(res => {
@@ -111,6 +112,9 @@ export default function ChapterForm () {
 }
 
 /*
+                  /*<Alert messages={} show={} setShow={}/>*/
+
+                  /*
       <div>
         <div className="flex h-[100vh] ">
           <div className="flex w-[50vw] bg-[url('/src/assets/images/background-chapterform.png')] bg-cover">
