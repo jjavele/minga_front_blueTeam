@@ -1,23 +1,32 @@
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
-import { Link } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Link as Anchor } from "react-router-dom";
 export default function SignIn() {
   let inputEmail = useRef("");
   let inputPassword = useRef("");
+
   async function handleFormSubmit(event) {
     event.preventDefault();
+
     let datos = {
       email: inputEmail.current.value,
-      contraseña: inputPassword.current.value,
+      password: inputPassword.current.value,
     };
     try {
       let { data } = await api.post(apiUrl + endpoints.sign_in, datos);
+      localStorage.setItem("token", data.response?.token);
+      localStorage.setItem("user", JSON.stringify(data.response?.user));
+
       console.log(data);
     } catch (error) {
       console.log(error);
     }
   }
-
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate("/");
+  };
   return (
     <>
       <div className="flex h-[100vh]">
@@ -31,12 +40,7 @@ export default function SignIn() {
             Discover manga, manhua and manhwa, track your progress, have fun,
             read manga.
           </p>
-          <form
-            onSubmit={handleFormSubmit}
-            className="flex flex-col"
-            action="#"
-            method="POST"
-          >
+          <form onSubmit={(e) => handleFormSubmit(e)} className="flex flex-col">
             <fieldset>
               <legend
                 className="self-start mt-15 h-2 relative z-10 bg-white ms-5"
@@ -65,14 +69,15 @@ export default function SignIn() {
               className="p-3  border-4 w-[25vw] h-[5vh] rounded-lg"
             />
 
-            <Link
-              to="/"
-              name="Sign In"
-              type="submit"
-              className="mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
-            >
-              Sign In
-            </Link>
+            <div>
+              <Anchor to="/">
+                <input
+                  type="submit"
+                  value="signin"
+                  className="cursor-pointer mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
+                />
+              </Anchor>
+            </div>
 
             <div className=" flex items-center justify-center p-3 mt-4 border-4 w-[25vw] h-[5vh] rounded-lg">
               <img
@@ -82,13 +87,13 @@ export default function SignIn() {
               />
             </div>
           </form>
-          <p className="mt-3">
+          <Anchor to="/register" className="mt-3">
             you don't have an account yet?{" "}
             <span className="text-blue-500">Sign up</span>
-          </p>
-          <p className="mt-3">
+          </Anchor>
+          <Anchor to="/" className="mt-3">
             Go back to <span className="text-blue-500">home page</span>
-          </p>
+          </Anchor>
         </section>
       </div>
     </>

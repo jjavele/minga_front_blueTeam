@@ -1,17 +1,26 @@
-import React from 'react'
+import React from "react";
+import { Link as Anchor } from "react-router-dom";
 
-export default function ButtonWelcome({name}) {
+const isLoggedIn =
+  localStorage.getItem("token") && localStorage.getItem("user");
+export default function ButtonWelcome({ name }) {
   return (
     <div className="flex justify-center">
-          <a
-            href="#"
-            className="bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  w-[10rem] h-10 rounded-3xl lg:w-[10rem] flex items-center justify-center lg:hover:scale-110 lg:rounded-[6px]"
-          >
-            <p className="text-white lg:hidden">Started</p>
-            <p className="text-white hidden lg:block">Let's Go!</p>
-          </a>
-        </div>
-
-  )
+      {isLoggedIn ? (
+        <Anchor
+          to={"/mangas"}
+          className="bg-white text-orange-600 flex justify-center items-center gap-2.5 px-[55px] py-5 text-center text-xl font-medium leading-[95.187%] rounded-md w-60"
+        >
+          Explore Mangas!
+        </Anchor>
+      ) : (
+        <Anchor
+          to={"/login"}
+          className="bg-white text-orange-600 flex justify-center items-center gap-2.5 px-[55px] py-5 text-center text-xl font-medium leading-[95.187%] rounded-md w-60"
+        >
+          Lets Go!
+        </Anchor>
+      )}
+    </div>
+  );
 }
-
