@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
 
+
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link as Anchor } from "react-router-dom";
+
 export default function SignIn() {
   let inputEmail = useRef("");
   let inputPassword = useRef("");
@@ -71,6 +73,7 @@ export default function SignIn() {
               className="p-3  border-4 w-[25vw] h-[5vh] rounded-lg"
             />
 
+
             <div>
               <input
                 type="submit"
@@ -78,6 +81,7 @@ export default function SignIn() {
                 className="cursor-pointer mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
               />
             </div>
+
 
             <div className=" flex items-center justify-center p-3 mt-4 border-4 w-[25vw] h-[5vh] rounded-lg">
               <img

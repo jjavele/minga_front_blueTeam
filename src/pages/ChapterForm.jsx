@@ -1,28 +1,57 @@
 
 import React, { useState } from 'react'
 import { useRef } from "react";
-//import { api, apiUrl, endpoints } from "../utils/api";
+import { api, apiUrl, endpoints } from "../utils/api";
 import Alert from '../components/Alert';
 import Layout from '../layout/Layout';
 import Home from "./Home";
-import {Navigate} from 'react-router-dom'
+//import {Navigate} from 'react-router-dom'
 import { useParams, useNavigate} from 'react-router-dom'
+import NotAllow from './NotAllow';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 export default function ChapterForm () {
 
-  let {manga_id} = useParams()
-  console.log(manga_id)
-  let [chapter, setChapter] = useState([]);
-  //SI ESTUVIESE USANDO EN VEZ DE UNA VARIABLE LOCAL UN ESTADO, SE RE-RENDERIZARÍA.
+  let [show, setShow] = useState(true)
 
-  async function getData() {
-    try {
-      let { data } = await api.get("http://localhost:8080/api/chapters/");
-      setChapter(data.find(manga=> manga.id == _id));
-    } catch (error) {
-      console.log(error);
+  let id = useParams()
+    console.log(id.manga_id);
+    let title = useRef()
+    let order = useRef()
+    let pages = useRef()
+    let navigate = useNavigate()
+
+
+  function handleForm(element) {
+    element.preventDefault()
+    let array = pages.current.value
+    let listpage = array.split(",")
+    let data = {
+      manga_id: id.manga_id,
+      title: title.current.value,
+      order: order.current.value,
+      pages: listpage
     }
+    console.log(listpage);
+
+    axios.post("http://localhost:8080/api/chapters/register", data)
+      .then(res => {
+        console.log(res)
+        navigate('/')
+        Swal.fire({
+          icon: 'success',
+          title: 'Chapter upload successfully!',
+        })
+      })
+      .catch(error => {
+        const err = error.response.data.message
+        Swal.fire({
+          icon: 'error',
+          title: err,
+        })
+    })       
   }
 
   /*
@@ -32,8 +61,6 @@ export default function ChapterForm () {
   let pages = useRef()
   let navigate = useNavigate()
   */
-
-
   
   let user = JSON.parse(localStorage.getItem('user1'))
   let role = user.role;
@@ -51,6 +78,11 @@ export default function ChapterForm () {
   /*
   const [show, setShow ] = useState(true);
   */
+  /*
+  let role = localStorage.getItem('role')
+  let token = localStorage.getItem('token')
+  let headers = { headers: { 'Authorization': `Bearer ${token}` } }
+  */
 
   if(online == true && role == 1 || role == 2){
     return (
@@ -61,13 +93,13 @@ export default function ChapterForm () {
           <div className="flex justify-center items-center mb-10 text-center text-black">
             <h1 className="text-3xl -tracking-tight font-sans">New Chapter</h1>
           </div>
-            <form className="flex flex-col items-center justify-center space-y-6 pt-14">
-              <input type="text" placeholder="Insert title" className="w-80 appearance-none border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none text-center" />
+            <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center justify-center space-y-6 pt-14">
+              <input type="text" placeholder="Insert title" className="w-80 appearance-none border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none text-center" ref={title} />
                 <div>
-                  <input type="text" placeholder="Insert order" className="w-80 appearance-none text-black border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-center" />
+                  <input type="text" placeholder="Insert order" className="w-80 appearance-none text-black border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-center" ref={order} />
                 </div>
                 <div>
-                  <input type="text" placeholder="Insert pages" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-20 text-center" />
+                  <input type="text" placeholder="Insert pages" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-20 text-center" ref={pages} />
                 </div>
                   <button className="rounded-full bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  p-2 px-36 py-4 text-white t-10 font-bold text-lg"> Send</button>
             </form>              
@@ -75,12 +107,15 @@ export default function ChapterForm () {
       </div>
     )}  else if(online == false || role != 1 || role != 2) {
           return (
-            <Navigate to={"/"}/>
+            <NotAllow/>
           )
         }         
 }
 
 /*
+                  /*<Alert messages={} show={} setShow={}/>*/
+
+                  /*
       <div>
         <div className="flex h-[100vh] ">
           <div className="flex w-[50vw] bg-[url('/src/assets/images/background-chapterform.png')] bg-cover">
