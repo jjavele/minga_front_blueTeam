@@ -6,6 +6,12 @@ export default function Drawer({ isOpen, setIsOpen }) {
   let role = user?.role || 0;
   console.log(user);
 
+  const isLoggedIn = () => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    return token && user;
+  };
+
   const navigate = useNavigate();
   function backHome() {
     localStorage.clear();
@@ -36,17 +42,20 @@ export default function Drawer({ isOpen, setIsOpen }) {
             className="hidden sm:block ms-[20%] w-[24px] h-[24px] hoover:"
           />
         </div>
-        <div className="lg:text-lg">
+        <div className="lg:text-lg flex flex-col">
           <Anchor>
             <p className="p-3 hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
               Home
             </p>
           </Anchor>
-         { !token && <Anchor to="/register">
-            <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
-              Register
-            </p>
-          </Anchor>}
+
+          {!token && (
+            <Anchor to="/register">
+              <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+                Register
+              </p>
+            </Anchor>
+          )}
           {!token && (
             <Anchor to="/login">
               <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
@@ -55,7 +64,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
             </Anchor>
           )}
 
-          {role == 1 || role == 2 ? (
+          {role == 1 || role == 2 || role == 3 ? (
             <>
               <Anchor to="/manga-form">
                 {" "}
@@ -68,16 +77,33 @@ export default function Drawer({ isOpen, setIsOpen }) {
                   New Chapter
                 </p>
               </Anchor>
-              <Anchor
-                className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md"
-                onClick={backHome}
-              >
-                Sign out
-              </Anchor>
             </>
           ) : (
             ""
           )}
+          {isLoggedIn() ? (
+            <Anchor className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+              Mangas
+            </Anchor>
+          ) : null}
+          {isLoggedIn() ? (
+            <Anchor className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+              My Mangas
+            </Anchor>
+          ) : null}
+          {isLoggedIn() ? (
+            <Anchor className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+              Favorites
+            </Anchor>
+          ) : null}
+          {isLoggedIn() ? (
+            <Anchor
+              onClick={backHome}
+              className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md"
+            >
+              Sign Out
+            </Anchor>
+          ) : null}
         </div>
       </div>
     </div>

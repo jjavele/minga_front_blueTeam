@@ -47,7 +47,11 @@ const router = createBrowserRouter([
 
       {
         path: "/register",
-        element: token ? <Register /> : <Navigate to="*" />
+        element: (
+          <ProtectedRoute>
+            <Register />
+          </ProtectedRoute>
+        ) 
       },
       {
         path: "/:manga_id/chapter-form",
