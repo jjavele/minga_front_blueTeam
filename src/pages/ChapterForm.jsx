@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
@@ -23,68 +22,52 @@ export default function ChapterForm () {
     let pages = useRef()
     let navigate = useNavigate()
 
+    function handleForm(element) {
+      element.preventDefault()
+      let array = pages.current.value
+      let listpage = array.split(",")
+      let data = {
+        manga_id: id.manga_id,
+        title: title.current.value,
+        order: order.current.value,
+        pages: listpage
+      }
+      console.log(listpage);
 
-  function handleForm(element) {
-    element.preventDefault()
-    let array = pages.current.value
-    let listpage = array.split(",")
-    let data = {
-      manga_id: id.manga_id,
-      title: title.current.value,
-      order: order.current.value,
-      pages: listpage
-    }
-    console.log(listpage);
-
-    axios.post("http://localhost:8080/api/chapters/register", data)
-      .then(res => {
-        console.log(res)
-        navigate('/')
-        Swal.fire({
-          icon: 'success',
-          title: 'Chapter upload successfully!',
+      axios.post("http://localhost:8080/api/chapters/register", data, headers)
+        .then(res => {
+          console.log(res)
+          navigate('/')
+          Swal.fire({
+            icon: 'success',
+            title: 'Chapter uploaded successfully!',
+          })
         })
-      })
-      .catch(error => {
-        const err = error.response.data.message
-        Swal.fire({
-          icon: 'error',
-          title: err,
-        })
-    })       
+        .catch(error => {
+          const err = error.response.data.message
+          Swal.fire({
+            icon: 'error',
+            title: err,
+          })
+      })       
   }
 
-  /*
-  let id = useParams()
-  let title = useRef()
-  let order = useRef()
-  let pages = useRef()
-  let navigate = useNavigate()
-  */
   
+  /*
   let user = JSON.parse(localStorage.getItem('user1'))
   let role = user.role;
   let online = user.online
-  
-  /*
-  let role = localStorage.getItem('role')
-  let onlie = localStorage.getItem('online')
-
+  */
   /*
   let role = 1;
   let online = true;
   */
-  
-  /*
-  const [show, setShow ] = useState(true);
-  */
-  /*
-  let role = localStorage.getItem('role')
+  let user = JSON.parse(localStorage.getItem('user'))
+  let role = user?.role || 0
   let token = localStorage.getItem('token')
   let headers = { headers: { 'Authorization': `Bearer ${token}` } }
-  */
 
-  if(online == true && role == 1 || role == 2){
+  if(role == 1 || role == 2){
     return (
       <div className="flex h-[100vh] ">
         <div className="w-[45vw] bg-[url('/src/assets/images/background-chapterform.png')] bg-cover hidden md:block">
@@ -105,7 +88,7 @@ export default function ChapterForm () {
             </form>              
         </section>
       </div>
-    )}  else if(online == false || role != 1 || role != 2) {
+    )}  else {
           return (
             <NotAllow/>
           )
@@ -132,6 +115,4 @@ export default function ChapterForm () {
             </div>
           </div>
         </div>*/
-
-
-
+        

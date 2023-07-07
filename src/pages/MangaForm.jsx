@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function MangaForm() {
     // Obtiene el valor del rol almacenado en el localStorage
+    //  todo: const role = localStorage.getItem("role");
+
     let user = JSON.parse(localStorage.getItem("user"));
     console.log(localStorage.getItem("user"));
-    let role = user?.role; 
+    let role = user.role;
 
     let [categories, setCategories] = useState([]);
 
@@ -103,7 +105,7 @@ export default function MangaForm() {
                             />
                         </div>
                         <div>
-                            <select ref={category} className="w-80 border-b border-gray-500 p-2">
+                            <select ref={category} className="w-80 ">
                                 <option>Select category</option>
                                 {option()}
                             </select>

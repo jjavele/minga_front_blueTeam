@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="flex flex-col justify-center items-center lg:flex-row lg:justify-around lg:my-[4rem]">
         <div className="flex">
           <a
-            href="#"
+            href="/"
             className="text-sm m-2 mt-5 md:text-xl hover:underline lg:mr-[5rem]"
           >
             Home

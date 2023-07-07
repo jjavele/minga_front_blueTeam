@@ -30,7 +30,6 @@ export default function SignIn() {
     }
   }
 
-  console.log("hola");
   return (
     <>
       <div className="flex h-[100vh]">
@@ -45,23 +44,19 @@ export default function SignIn() {
             read manga.
           </p>
           <form onSubmit={(e) => handleFormSubmit(e)} className="flex flex-col">
-            <fieldset>
-              <legend
-                className="self-start mt-15 h-2 relative z-10 bg-white ms-5"
-                htmlFor="email"
-              >
-                Email
-              </legend>
-              <input
-                ref={inputEmail}
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="p-3 mb-4  border-4 w-[25vw] h-[5vh] rounded-lg"
-              />
-            </fieldset>
+
+            <input
+              ref={inputEmail}
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              placeholder=" Email"
+              className="p-3 mb-4  border-4 w-[25vw] h-[5vh] rounded-lg"
+            />
+
+
             <input
               ref={inputPassword}
               id="password"
@@ -92,13 +87,12 @@ export default function SignIn() {
             </div>
           </form>
           <Anchor to="/register" className="mt-3">
-            you don't have an account yet?{" "}
+            You don't have an account yet?{" "}
             <span className="text-blue-500">Sign up</span>
           </Anchor>
           <Anchor to="/" className="mt-3">
             Go back to <span className="text-blue-500">home page</span>
           </Anchor>
-          =
         </section>
       </div>
     </>
