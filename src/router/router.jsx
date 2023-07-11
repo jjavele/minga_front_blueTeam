@@ -5,7 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import ProtectectionWhenLogged from "./ProtectectionWhenLogged";
 
 
-import { Layout, Login, ChapterForm, Register, MangaForm } from "./index";
+import { Layout, Login, ChapterForm, Register, MangaForm, Author } from "./index";
 import Home from "../pages/Home";
 
 import NotAllow from "../pages/NotAllow";
@@ -66,6 +66,14 @@ const router = createBrowserRouter([
         path: "*",
         element: <NotAllow />,
       },
+      {
+        path: "/me",
+        element: (
+          <ProtectectionWhenLogged>
+            <Author />
+          </ProtectectionWhenLogged>
+          )
+      }
     ],
   },
 
