@@ -77,6 +77,11 @@ export default function Drawer({ isOpen, setIsOpen }) {
                   New Chapter
                 </p>
               </Anchor>
+              <Anchor to="/me">
+                <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+                  Profile
+                </p>
+              </Anchor>
             </>
           ) : (
             ""
@@ -95,7 +100,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
             <Anchor className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
               Favorites
             </Anchor>
-          ) : null}
+          ): null}
           {isLoggedIn() ? (
             <Anchor
               onClick={backHome}
