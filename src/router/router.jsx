@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 
 import ProtectedRoute from "./ProtectedRoute";
+import ProtectectionWhenLogged from "./ProtectectionWhenLogged";
 
 
 import { Layout, Login, ChapterForm, Register, MangaForm } from "./index";
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/:manga_id/chapter-form",
-        element: <ChapterForm />,
+        element: (
+          <ProtectectionWhenLogged>
+            <ChapterForm />
+          </ProtectectionWhenLogged>
+        )
       },
 
       {
@@ -56,12 +61,13 @@ const router = createBrowserRouter([
       {
         path: "/:manga_id/chapter-form",
         element: <ChapterForm />,
-      }
+      },
+      {
+        path: "*",
+        element: <NotAllow />,
+      },
     ],
   },
-  {
-    path: "*",
-    element: <NotAllow />,
-  },
+
 ]);
 export default router;

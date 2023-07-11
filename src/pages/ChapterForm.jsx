@@ -1,19 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRef } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
-import Alert from '../components/Alert';
-import Layout from '../layout/Layout';
-import Home from "./Home";
-//import {Navigate} from 'react-router-dom'
 import { useParams, useNavigate} from 'react-router-dom'
-import NotAllow from './NotAllow';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
 export default function ChapterForm () {
-
-  let [show, setShow] = useState(true)
 
   let id = useParams()
     console.log(id.manga_id);
@@ -33,8 +26,15 @@ export default function ChapterForm () {
         pages: listpage
       }
       console.log(listpage);
-
-      axios.post("http://localhost:8080/api/chapters/register", data, headers)
+      
+      let token = localStorage.getItem('token')
+      let headers = {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      };
+      
+      axios.post("http://localhost:8080/api/chapters/", data, headers)
         .then(res => {
           console.log(res)
           navigate('/')
@@ -50,7 +50,7 @@ export default function ChapterForm () {
             title: err,
           })
       })       
-  }
+    }
 
   
   /*
@@ -62,38 +62,30 @@ export default function ChapterForm () {
   let role = 1;
   let online = true;
   */
-  let user = JSON.parse(localStorage.getItem('user'))
-  let role = user?.role || 0
-  let token = localStorage.getItem('token')
-  let headers = { headers: { 'Authorization': `Bearer ${token}` } }
 
-  if(role == 1 || role == 2){
     return (
-      <div className="flex h-[100vh] ">
-        <div className="w-[45vw] bg-[url('/src/assets/images/background-chapterform.png')] bg-cover hidden md:block">
-        </div>
-        <section className="flex flex-col w-[100vw] md:w-[55vw] justify-center items-center text-slate-300">
-          <div className="flex justify-center items-center mb-10 text-center text-black">
-            <h1 className="text-3xl -tracking-tight font-sans">New Chapter</h1>
+        <div className="flex h-[100vh] ">
+          <div className="w-[45vw] bg-[url('/src/assets/images/background-chapterform.png')] bg-cover hidden md:block">
           </div>
+          <section className="flex flex-col w-[100vw] md:w-[55vw] justify-center items-center text-white">
+            <div className="flex justify-center items-center mb-10 text-center text-black">
+              <h1 className="text-3xl -tracking-tight font-sans">New Chapter</h1>
+            </div>
             <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center justify-center space-y-6 pt-14">
               <input type="text" placeholder="Insert title" className="w-80 appearance-none border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none text-center" ref={title} />
-                <div>
-                  <input type="text" placeholder="Insert order" className="w-80 appearance-none text-black border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-center" ref={order} />
-                </div>
-                <div>
-                  <input type="text" placeholder="Insert pages" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-20 text-center" ref={pages} />
-                </div>
-                  <button className="rounded-full bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  p-2 px-36 py-4 text-white t-10 font-bold text-lg"> Send</button>
+              <div>
+                <input type="text" placeholder="Insert order" className="w-80 appearance-none text-black border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-center" ref={order} />
+              </div>
+              <div>
+                <input type="text" placeholder="Insert pages" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-20 text-center" ref={pages} />
+              </div>
+              <button className="rounded-full bg-gradient-to-r from-[#4338CA] to-[#5E52F3]  p-2 px-36 py-4 text-white t-10 font-bold text-lg"> Send</button>
             </form>              
-        </section>
-      </div>
-    )}  else {
-          return (
-            <NotAllow/>
-          )
-        }         
+          </section>
+        </div>
+    )        
 }
+
 
 /*
                   /*<Alert messages={} show={} setShow={}/>*/
