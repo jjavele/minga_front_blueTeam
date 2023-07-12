@@ -87,7 +87,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
             ""
           )}
           {isLoggedIn() ? (
-            <Anchor className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+            <Anchor to="/mangas" className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
               Mangas
             </Anchor>
           ) : null}

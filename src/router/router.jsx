@@ -5,7 +5,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import ProtectectionWhenLogged from "./ProtectectionWhenLogged";
 
 
-import { Layout, Login, ChapterForm, Register, MangaForm, Author } from "./index";
+import { Layout, Login, ChapterForm, Register, MangaForm, Author, Mangas} from "./index";
+
 import Home from "../pages/Home";
 
 import NotAllow from "../pages/NotAllow";
@@ -63,6 +64,15 @@ const router = createBrowserRouter([
         element: <ChapterForm />,
       },
       {
+        path: "/mangas",
+        element: <Mangas />,
+      },
+      {
+        path: "*",
+        element: <NotAllow />,
+      },
+    ],
+  },
         path: "*",
         element: <NotAllow />,
       },
@@ -76,6 +86,7 @@ const router = createBrowserRouter([
       }
     ],
   },
+
 
 ]);
 export default router;
