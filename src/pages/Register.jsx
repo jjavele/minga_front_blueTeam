@@ -30,11 +30,11 @@ export default function Register() {
           });
         })
         .catch((error) => {
-          const err = error.response.data.message;
+          const err = error.response.data.message.map(each => `<p>${each}</p>`).join("");
           Swal.fire({
             icon: "error",
             confirmButtonText: "Ok 🥺",
-            title: err,
+            html: err,
           });
         });
     }
@@ -86,7 +86,7 @@ export default function Register() {
           />
         </div>
         <div className="my-[8px]">
-          <label>
+          <label className="">
             <input type="checkbox" id="miCheckbox" /> Send notification to my
             email
           </label>
