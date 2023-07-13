@@ -1,7 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import inputReducer from './reducers/inputReducer'
+import authorReducer from './reducers/me_authors'
+import mangasReducer from './reducers/mangas_news'
+
 export const store = configureStore ({
 reducer: {
-    input: inputReducer
+    //manga:mangaReducer,
+    author: authorReducer,
+    mangas: mangasReducer
 }
 })
