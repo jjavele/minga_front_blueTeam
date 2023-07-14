@@ -7,5 +7,7 @@ export const endpoints = {
   read_equipos: "equipos/read",
   sign_in: "auth/signin",
   chapter: "chapter-form",
+  read_mangas: "mangas",
+  read_categories: "categories"
 
 }

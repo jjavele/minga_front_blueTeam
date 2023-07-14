@@ -18,6 +18,3 @@ export default function Welcome() {
     </div>
   );
 }
-/*
-className="bg-[url('/src/assets/images/backgroundmanga.png')] h-[60vh] w-full bg-cover lg:bg-[url('/src/assets/images/background.png')] lg:h-[60vh] lg:w-full lg:bg-center"
-*/
