@@ -15,7 +15,7 @@ export default function Carousel() {
     axios
       .get("http://localhost:8080/api/categories")
       .then((res) => {
-        setCategories(res.data.response);
+        setCategories(res.data.categories);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -31,9 +31,6 @@ export default function Carousel() {
   if (categories.length === 0) {
     return null;
   }
-
-  // const currentCategory = categories[counter];
-  // const { character_photo, cover_photo, description, name } = currentCategory;
 
   return (
     <div className="hidden lg:flex justify-center items-center w-full lg:h-[40vh]">

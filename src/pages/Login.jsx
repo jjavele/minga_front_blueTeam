@@ -79,7 +79,7 @@ export default function SignIn() {
             <div>
               <input
                 type="submit"
-                value="signin"
+                value="Log in"
                 className="cursor-pointer mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
               />
             </div>
