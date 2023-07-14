@@ -10,14 +10,14 @@ export default function ButtonWelcome({ name }) {
       {isLoggedIn ? (
         <Anchor
           to={"/mangas"}
-          className="bg-white text-orange-600 flex justify-center items-center gap-2.5 px-[55px] py-5 text-center text-xl font-medium leading-[95.187%] rounded-md w-60"
+          className="bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-[#FFFFFF] flex justify-center items-center gap-2.5 px-[55px] py-5 text-center text-xl font-medium leading-[95.187%] rounded-md w-60"
         >
           Explore Mangas!
         </Anchor>
       ) : (
         <Anchor
           to={"/login"}
-          className="bg-white text-orange-600 flex justify-center items-center gap-2.5 px-[55px] py-5 text-center text-xl font-medium leading-[95.187%] rounded-md w-60"
+          className="bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-[#FFFFFF] flex justify-center items-center gap-2.5 px-[55px] py-5 text-center text-xl font-medium leading-[95.187%] rounded-md w-60"
         >
           Lets Go!
         </Anchor>
