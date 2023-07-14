@@ -2,16 +2,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 import ProtectectionWhenLogged from "./ProtectectionWhenLogged";
+import { Layout, Login, ChapterForm, Register, MangaForm, Author, Mangas} from "./index";
 
-import {
-  Layout,
-  Login,
-  ChapterForm,
-  Register,
-  MangaForm,
-  Author,
-  Mangas,
-} from "./index";
 
 import Home from "../pages/Home";
 
@@ -81,9 +73,8 @@ const router = createBrowserRouter([
           <ProtectectionWhenLogged>
             <Author />
           </ProtectectionWhenLogged>
-        ),
-      },
-    ],
-  },
+          )
+      }
+
 ]);
 export default router;

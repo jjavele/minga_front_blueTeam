@@ -11,3 +11,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </Provider>
 );
+*/
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <RouterProvider router={router}/>
+  </Provider>,
+)

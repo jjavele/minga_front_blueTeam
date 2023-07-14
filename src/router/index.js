@@ -5,3 +5,4 @@ export { default as MangaForm } from "../pages/MangaForm"
 export { default as Mangas } from "../pages/Mangas"
 export { default as Author } from "../pages/Author"
 export { default as Register } from "../pages/Register"
+
