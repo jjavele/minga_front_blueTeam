@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setChapterData, setNextChapterId, setPageCounter } from "../../store/actions/chapters";
+import { setChapterData, setNextChapterId, setPageCounter } from "../../redux/actions/chapters";
 import ArrowPage from "../components/Arrow";
 import axios from "axios";
 import Swal from "sweetalert";

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import chaptersReducer from "./store/reducers/chapters";
+import chaptersReducer from "../redux/reducers/chapters";
 
 const store = configureStore({
     reducer: { 
