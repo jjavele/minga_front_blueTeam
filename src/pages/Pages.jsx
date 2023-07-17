@@ -12,7 +12,7 @@ const Page = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const pageCounter = useSelector((state) => state.chapters.pageCounter);
+    const pageCounter = useSelector((state) => state.chapters.pageCounter); //al estado almacenado del store
     const nextChapterId = useSelector((state) => state.chapters.nextChapterId);
     const number = useSelector((state) => state.chapters.number);
     const { title } = useSelector((state) => state.chapters);
@@ -42,7 +42,8 @@ const Page = () => {
 
     const navigateToNextChapter = () => {
         if (nextChapterId) {
-            navigate(`/chapter/${nextChapterId}/${manga_id}/${page + 1}`);
+            dispatch(setPageCounter(1));
+            navigate(`/chapter/${nextChapterId}/${manga_id}/${ 1  }`);
         } else {
             Swal({
                 title: "Final chapter",
