@@ -1,9 +1,29 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import ProtectectionWhenLogged from "./ProtectectionWhenLogged";
-import { Layout, Login, ChapterForm, Register, MangaForm, Author, Mangas, Pages} from "./index";
+
+
+
+import {
+  Layout,
+  Login,
+  ChapterForm,
+  Register,
+  MangaForm,
+  Author,
+  Mangas,
+  MangaDetail,
+  Pages
+} from "./index";
+
+
+
+
 import Home from "../pages/Home";
 import NotAllow from "../pages/NotAllow";
+import { element } from "prop-types";
+
+
 
 let token = true;
 
@@ -68,15 +88,29 @@ const router = createBrowserRouter([
         path: "*",
         element: <NotAllow />,
       },
+
+
       {
         path: "/me",
         element: (
           <ProtectectionWhenLogged>
             <Author />
           </ProtectectionWhenLogged>
+
+
+        ),
+      },
+      {
+        path: "/manga/:id/:page",
+        element: (
+          <ProtectectionWhenLogged>
+            <MangaDetail />
+          </ProtectectionWhenLogged>
+
         ),
       },
     ],
   },
+
 ]);
 export default router;
