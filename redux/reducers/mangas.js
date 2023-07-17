@@ -4,6 +4,7 @@ import  inputActions from "../actions/mangas";
 const initialState = {
   text: "",
   checks: [],
+  page: 1,
 };
 
 const mangaReducer = createReducer(initialState, (builder) => {

@@ -3,23 +3,19 @@ import { api, apiUrl, endpoints } from "../utils/api";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import inputActions from "../../redux/actions/mangas";
 
-const capitalize = (text) => {
-  return text.charAt(0).toUpperCase() + text.slice(1);
-};
-
 export default function Mangas() {
   const store = useStore();
   const dispatch = useDispatch();
   const [mangas, setMangas] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
   const [title, setTitle] = useState("");
   const [categoriesSelected, setCategoriesSelected] = useState([]);
-
   const state = store.getState();
-  console.log(state);
   const checks = useSelector((state) => state.checks);
   const text = useSelector((state) => state.text);
-  console.log(checks);
+
   const dispatchFilters = (check) => {
     let payload = [];
     if (!checks.includes(check)) {
@@ -31,12 +27,20 @@ export default function Mangas() {
     dispatch(inputActions.changeChecks(payload));
   };
 
+  const capitalize = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
+
   const getMangas = async () => {
     try {
       let { data } = await api.get(
-        apiUrl + endpoints.read_mangas + `?title=${text}&category_id=${checks}`
+        apiUrl +
+          endpoints.read_mangas +
+          `?title=${text}&category_id=${checks}&page=${page}`
       );
       setMangas(data.mangas);
+      setTotalPages(data.totalPages);
+
     } catch (error) {
       console.log(error);
     }
@@ -56,10 +60,71 @@ export default function Mangas() {
     dispatch(inputActions.changeChecks([]));
   };
 
+  console.log(mangas);
+
+  const PrevButton = (props) => {
+    const { page } = props;
+    if (page !== 1) {
+      return (
+        <button
+          {...props}
+          className="self-center text-white font-bold text-lg hover:scale-[1.1]"
+        >
+          <strong>{"<<<"}</strong>
+        </button>
+      );
+    } else {
+      return (
+        <button
+          {...props}
+          className="self-center text-gray-400 font-bold text-lg hover:scale-[1.1]"
+          disabled
+        >
+          <strong>{"<<<"}</strong>
+        </button>
+      );
+    }
+  };
+
+  const NextButton = (props) => {
+    const { page, totalPages } = props;
+    if (page !== totalPages) {
+      return (
+        <button
+          {...props}
+          className="self-center text-white font-bold text-lg hover:scale-[1.1]"
+        >
+          <strong>{">>>"}</strong>
+        </button>
+      );
+    } else {
+      return (
+        <button
+          {...props}
+          className="self-center text-gray-400 font-bold text-lg hover:scale-[1.1]"
+          disabled
+        >
+          <strong> {">>>"}</strong>
+        </button>
+      );
+    }
+  };
+
+  const goToPrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const goToNextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
   useEffect(() => {
     getMangas();
     getCategories();
-  }, [text, checks]);
+  }, [text, checks, page]);
 
   return (
     <div className="flex flex-col min-h-screen bg-[url('/src/assets/images/backgroundmangas.png')] bg-contain bg-no-repeat justify-center">
@@ -159,11 +224,15 @@ export default function Mangas() {
           </div>
         </div>
         <div className="flex h-[3rem] w-[30rem] m-4 justify-around bg-gradient-to-r from-blue-400 to-pink-400 rounded-3xl">
-          <p className="self-center text-white font-bold text-lg">Prev</p>
+          <PrevButton page={page} onClick={goToPrevPage}></PrevButton>
           <img className="" src="../src/assets/images/prevchan.webp" />
           <div className="w-[15rem]"></div>
           <img className="" src="../src/assets/images/nextchan.webp" />
-          <p className="self-center text-white font-bold text-lg">Next</p>
+          <NextButton
+            page={page}
+            totalPages={totalPages}
+            onClick={goToNextPage}
+          ></NextButton>
         </div>
       </div>
     </div>
