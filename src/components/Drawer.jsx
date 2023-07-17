@@ -48,7 +48,6 @@ export default function Drawer({ isOpen, setIsOpen }) {
               Home
             </p>
           </Anchor>
-
           {!token && (
             <Anchor to="/register">
               <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">

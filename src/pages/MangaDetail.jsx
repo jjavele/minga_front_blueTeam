@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import mangaActions from "../redux/actions/manga";
 import axios from "axios";
 import Button from "/src/components/Button";
+import { Link as Anchor } from "react-router-dom";
 
 export default function MangaDetail() {
   const { id, page } = useParams();
@@ -23,7 +24,7 @@ export default function MangaDetail() {
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/mangas/${id}`, headers)
-      .then((res) => dispatch(mangaActions.datos_manga(res.data.response)))
+      .then((res) => dispatch(mangaActions.datos_manga(res.data.manga)))
       .catch((err) => console.error(err));
   }, []);
 
@@ -102,12 +103,12 @@ export default function MangaDetail() {
               >
                 {" "}
                 <img
-                  src={chapter.cover_photo}
+                  src={chapter?.cover_photo}
                   alt=""
                   className="hover:focus:placeholder:marker w-20"
                 />
                 <div className="flex gap-4 flex-col">
-                  <h3>{chapter.title}</h3>
+                  <h3>{chapter?.title}</h3>
                   <div className="flex">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -123,12 +124,16 @@ export default function MangaDetail() {
                         d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
                       />
                     </svg>{" "}
-                    <p>{chapter.number}</p>
+                    <p>{chapter?.number}</p>
                   </div>
                 </div>
-                <button className="text-white bg-blue-700 w-24 h-16 rounded-full">
+                <Anchor
+                  to={`/chapter/${id}/${chapter._id}/1`}
+                  className="text-center font-bold text-white rounded-full bg-blue-700 h-fit p-3"
+                >
+                  {" "}
                   Read
-                </button>
+                </Anchor>
               </div>
             ))}
             <div className="flex justify-center">

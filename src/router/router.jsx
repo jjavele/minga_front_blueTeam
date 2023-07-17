@@ -2,8 +2,6 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import ProtectectionWhenLogged from "./ProtectectionWhenLogged";
 
-
-
 import {
   Layout,
   Login,
@@ -13,17 +11,12 @@ import {
   Author,
   Mangas,
   MangaDetail,
-  Pages
+  Pages,
 } from "./index";
-
-
-
 
 import Home from "../pages/Home";
 import NotAllow from "../pages/NotAllow";
 import { element } from "prop-types";
-
-
 
 let token = true;
 
@@ -36,7 +29,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-
       {
         path: "/manga-form",
         element: <MangaForm />,
@@ -57,7 +49,6 @@ const router = createBrowserRouter([
           </ProtectectionWhenLogged>
         ),
       },
-
       {
         path: "/register",
         element: (
@@ -71,12 +62,14 @@ const router = createBrowserRouter([
         element: <ChapterForm />,
       },
       {
-        path: "/chapter/:id/:manga_id/:page",
+        path: "/chapter/:manga_id/:id/:page",
         element: (
-          <ProtectedRoute>
+          <ProtectectionWhenLogged>
             <Pages />
-          </ProtectedRoute>
-        ) 
+          </ProtectectionWhenLogged>
+        ),
+      },
+      {
         path: "/mangas",
         element: (
           <ProtectectionWhenLogged>
@@ -85,19 +78,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "*",
-        element: <NotAllow />,
-      },
-
-
-      {
         path: "/me",
         element: (
           <ProtectectionWhenLogged>
             <Author />
           </ProtectectionWhenLogged>
-
-
         ),
       },
       {
@@ -106,11 +91,14 @@ const router = createBrowserRouter([
           <ProtectectionWhenLogged>
             <MangaDetail />
           </ProtectectionWhenLogged>
-
         ),
+      },
+      {
+        path: "*",
+        element: <NotAllow />,
       },
     ],
   },
-
 ]);
+
 export default router;

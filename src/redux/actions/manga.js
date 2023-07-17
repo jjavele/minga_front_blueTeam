@@ -4,6 +4,7 @@ const datos_manga = createAction(
 (objeto) => { //funcion que va a enviar datos al reductor 
                //el objeto debe tener todas las propiedades a guardarse en el estado global
                console.log(objeto)
+               console.log("action")
 return {
  payload: objeto 
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import inputActions from "../../redux/actions/mangas";
+import inputActions from "../redux/actions/mangas";
+import { Link as Anchor } from "react-router-dom";
 
 export default function Mangas() {
   const store = useStore();
@@ -13,8 +14,8 @@ export default function Mangas() {
   const [title, setTitle] = useState("");
   const [categoriesSelected, setCategoriesSelected] = useState([]);
   const state = store.getState();
-  const checks = useSelector((state) => state.checks);
-  const text = useSelector((state) => state.text);
+  const checks = useSelector((state) => state.check.checks);
+  const text = useSelector((state) => state.check.text);
 
   const dispatchFilters = (check) => {
     let payload = [];
@@ -40,7 +41,6 @@ export default function Mangas() {
       );
       setMangas(data.mangas);
       setTotalPages(data.totalPages);
-
     } catch (error) {
       console.log(error);
     }
@@ -164,7 +164,7 @@ export default function Mangas() {
                 key={category._id}
                 onClick={() => dispatchFilters(category._id)}
                 style={{
-                  backgroundColor: checks.includes(category._id)
+                  backgroundColor: checks?.includes(category._id)
                     ? category.hover
                     : category.color,
                 }}
@@ -188,7 +188,7 @@ export default function Mangas() {
                   </p>
                   <br />
                   <br />
-                  <a href={`/manga/${manga._id}`} className="text-center">
+                  <Anchor to={`/manga/${manga._id}/1`} className="text-center">
                     <button
                       className="h-[2.5rem] w-[6rem] bg-green-500 rounded-full shadow-sm hover:scale-[1.2]"
                       style={{
@@ -200,7 +200,7 @@ export default function Mangas() {
                     >
                       Read
                     </button>
-                  </a>
+                  </Anchor>
                 </div>
                 <img
                   className="w-[50%] max-h-max rounded-[30%_0px_0_30%]"
