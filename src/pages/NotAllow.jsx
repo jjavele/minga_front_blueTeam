@@ -12,7 +12,7 @@ export default function NotAllow() {
         <div>
           <img
             className="h-[10rem] border-dashed border-black border-2 m-[2rem] mb-[4rem] rounded-2xl"
-            src="../src/assets/images/gif/brook-yohoho.gif"
+            src="../../src/assets/images/gif/brook-yohoho.gif"
             alt="yohohohoho"
           />
         </div>

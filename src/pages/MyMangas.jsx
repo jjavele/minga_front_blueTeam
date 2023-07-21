@@ -3,41 +3,28 @@ import { api, apiUrl, endpoints } from "../utils/api";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import inputActions from "../redux/actions/mangas";
 import { Link as Anchor } from "react-router-dom";
+import ModalMangas from "../components/ModalMangas";
 
-export default function Mangas() {
-  const store = useStore();
+export default function MyMangas() {
   const dispatch = useDispatch();
   const [mangas, setMangas] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(null);
-  const [title, setTitle] = useState("");
-  const [categoriesSelected, setCategoriesSelected] = useState([]);
-  const state = store.getState();
-  const checks = useSelector((state) => state.check.checks);
+  const [totalPages, setTotalPages] = useState(undefined);
+  const [stateModal, setStateModal] = useState(false);
   const text = useSelector((state) => state.check.text);
-
-  const dispatchFilters = (check) => {
-    let payload = [];
-    if (!checks.includes(check)) {
-      payload = [...checks, check];
-      dispatch(inputActions.changeChecks([...checks, check]));
-    } else {
-      payload = checks.filter((category) => category !== check);
-    }
-    dispatch(inputActions.changeChecks(payload));
-  };
-
-  const capitalize = (text) => {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  };
+  const userId = JSON.parse(localStorage.getItem("user"))._id;
 
   const getMangas = async () => {
     try {
+      let token = localStorage.getItem("token");
+      let headers = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       let { data } = await api.get(
-        apiUrl +
-          endpoints.read_mangas +
-          `?title=${text}&category_id=${checks}&page=${page}`
+        apiUrl + endpoints.get_me + `?title=${text}&page=${page}`,
+        headers
       );
       setMangas(data.mangas);
       setTotalPages(data.totalPages);
@@ -45,22 +32,6 @@ export default function Mangas() {
       console.log(error);
     }
   };
-
-  const getCategories = async () => {
-    try {
-      let { data } = await api.get(apiUrl + endpoints.read_categories);
-      setCategories(data.categories);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const resetFilters = () => {
-    setCategoriesSelected([]);
-    dispatch(inputActions.changeChecks([]));
-  };
-
-  console.log(mangas);
 
   const PrevButton = (props) => {
     const { page } = props;
@@ -123,93 +94,103 @@ export default function Mangas() {
 
   useEffect(() => {
     getMangas();
-    getCategories();
-  }, [text, checks, page]);
+  }, [text, page]);
+
+  console.log(mangas);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[url('/src/assets/images/backgroundmangas.png')] bg-contain bg-no-repeat justify-center">
-      <div className="flex flex-col items-center mt-[15rem]">
-        <h1 className="text-white text-5xl font-bold">Mangas</h1>
-        <br />
-        <br />
-        <br />
-        <input
-          onKeyUp={(e) => {
-            dispatch(inputActions.changeText(e.target.value));
-            console.log(e.target.value);
-          }}
-          type="search"
-          className="p-3 h-10 w-1/2 rounded-lg"
-          placeholder="Find your manga here"
-        />
-        <br />
-        <br />
-        <br />
-        <br />
+    <div className="flex flex-col min-h-screen bg-[url('/src/assets/images/mymangasbackground.png')] bg-contain bg-no-repeat">
+      <div className="flex flex-col items-center mt-[10rem]">
+        <h1 className="text-white text-5xl font-bold m-[5rem] p-2">
+          Own Mangas
+        </h1>
         <div className="min-h-[27rem] w-[90%] bg-white rounded-2xl items-center justify-center text-center mb-[2rem]">
-          <div className="flex h-[6rem] justify-center items-center gap-4">
-            <button
-              onClick={() => resetFilters()}
-              className="py-1 px-4 rounded-full text-white hover:scale-[1.1]"
-              style={{
-                borderRadius: "50px",
-                background: "gray",
-              }}
-            >
-              All
-            </button>
-
-            {categories.map((category) => (
-              <button
-                key={category._id}
-                onClick={() => dispatchFilters(category._id)}
-                style={{
-                  backgroundColor: checks?.includes(category._id)
-                    ? category.hover
-                    : category.color,
-                }}
-                className="py-1 px-4 rounded-full text-white hover:scale-[1.1]"
-              >
-                {capitalize(category.name)}
-              </button>
-            ))}
-          </div>
           <div className="justify-center items-center flex flex-wrap gap-[5rem]">
-            {mangas.map((manga) => (
+            <input
+              onKeyUp={(e) => {
+                dispatch(inputActions.changeText(e.target.value));
+                console.log(e.target.value);
+              }}
+              type="search"
+              className="p-3 h-10 w-full m-5 rounded-lg text-center border-solid border-4 border-black"
+              placeholder="Find your manga here"
+            />
+            <Anchor
+              to="/manga-form"
+              className="h-[14rem] w-[25rem] flex justify-center items-center border-solid rounded-xl border-green-500 border-l-2 shadow-2xl hover:scale-[1.1]"
+            >
+              <img
+                className="h-[6rem] "
+                src="../../src/assets/images/add_icon.jpg"
+              />
+            </Anchor>
+            {mangas?.map((manga) => (
               <div
                 key={manga.title}
                 className="h-[14rem] w-[25rem] flex justify-end border-solid rounded-xl border-blue-500 border-l-2 shadow-2xl "
               >
                 <div className="w-[50%] flex flex-col text-center items-center justify-center">
-                  <p className="text-xl">{manga.title}</p>
+                  <div className="flex">
+                    <Anchor to="/chapter-form/:id_manga">
+                      <img
+                        src="/src/assets/images/add.png"
+                        className="h-6 m-1 p-1 border-solid border-black border-2 rounded-full"
+                      />
+                    </Anchor>
+                    <Anchor to="/edit/:id_manga">
+                      <img
+                        src="/src/assets/images/edit.png"
+                        className="h-6 m-1 p-1 border-solid border-black border-2 rounded-full"
+                      />
+                    </Anchor>
+                  </div>
                   <br />
-                  <p className="text-gray-400">
-                    {capitalize(manga.category_id?.name)}
+                  <Anchor
+                    to={`/mangas/:page`}
+                    className="text-lg hover:scale-[1.1]"
+                  >
+                    {manga.title}
+                  </Anchor>
+                  <p className="text-gray-400 capitalize">
+                    {manga.category_id.name}
                   </p>
                   <br />
-                  <br />
-                  <Anchor to={`/manga/${manga._id}/1`} className="text-center">
+                  <Anchor className="text-center">
                     <button
-                      className="h-[2.5rem] w-[6rem] bg-green-500 rounded-full shadow-sm hover:scale-[1.2]"
+                      onClick={() => {
+                        setStateModal(!stateModal);
+                      }}
+                      className="h-[2rem] w-[4rem] bg-blue-500 rounded-full shadow-sm hover:scale-[1.1] m-2"
                       style={{
                         fontSize: "20px",
-                        color: "#00BA88",
+                        color: "white",
                         borderRadius: "50px",
-                        background: "#D1FBF0",
                       }}
                     >
-                      Read
+                      Edit
+                    </button>
+
+                    <button
+                      className="h-[2rem] w-[5rem] bg-red-500 rounded-full shadow-sm hover:scale-[1.1] m-2"
+                      style={{
+                        fontSize: "20px",
+                        color: "white",
+                        borderRadius: "50px",
+                      }}
+                    >
+                      Delete
                     </button>
                   </Anchor>
                 </div>
-                <img
-                  className="w-[50%] max-h-max rounded-[30%_0px_0_30%]"
-                  src={manga.cover_photo}
-                  alt={manga.title}
-                />
+                <Anchor to={`/mangas/:page`} className="w-[50%]">
+                  <img
+                    src={manga.cover_photo}
+                    className="w-full h-full max-h-max rounded-[30%_0px_0_30%]"
+                  />
+                </Anchor>
               </div>
             ))}
-            {mangas.length === 0 && (
+            {mangas?.length === 0 && (
               <div className="m-[4rem]">
                 <p className="text-white bg-gradient-to-r from-blue-400 to-pink-500 rounded-full p-3 inline-block">
                   Gomenasai!, I didn't find results
@@ -217,7 +198,6 @@ export default function Mangas() {
                 <img
                   className="h-[10rem]"
                   src="/src/assets/images/gif/noresults.gif"
-                  alt=""
                 />
               </div>
             )}
@@ -234,6 +214,7 @@ export default function Mangas() {
             onClick={goToNextPage}
           ></NextButton>
         </div>
+        <ModalMangas state={stateModal} change={setStateModal}></ModalMangas>
       </div>
     </div>
   );

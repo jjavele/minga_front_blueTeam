@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as Anchor } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -6,24 +7,24 @@ export default function Footer() {
       <div>
         <img
           className="rounded-[0px_0px_50%_50%] h-[30vh] w-full"
-
-
           src="/src/assets/images/gohanvidel.png"
-
           alt="gohan videl goten trunks"
         />
       </div>
       <div className="flex flex-col justify-center items-center lg:flex-row lg:justify-around lg:my-[4rem]">
         <div className="flex">
-          <a
-            href="/"
+          <Anchor
+            to="/"
             className="text-sm m-2 mt-5 md:text-xl hover:underline lg:mr-[5rem]"
           >
             Home
-          </a>
-          <a href="#" className="text-sm m-2 mt-5 md:text-xl hover:underline">
+          </Anchor>
+          <Anchor
+            to="/mangas"
+            className="text-sm m-2 mt-5 md:text-xl hover:underline"
+          >
             Mangas
-          </a>
+          </Anchor>
         </div>
 
         <img

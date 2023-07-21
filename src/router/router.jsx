@@ -17,6 +17,7 @@ import {
 import Home from "../pages/Home";
 import NotAllow from "../pages/NotAllow";
 import { element } from "prop-types";
+import MyMangas from "../pages/MyMangas";
 
 let token = true;
 
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectectionWhenLogged>
             <Mangas />
+          </ProtectectionWhenLogged>
+        ),
+      },
+      {
+        path: "/mymangas",
+        element: (
+          <ProtectectionWhenLogged>
+            <MyMangas />
           </ProtectectionWhenLogged>
         ),
       },
