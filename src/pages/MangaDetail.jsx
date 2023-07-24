@@ -5,6 +5,7 @@ import mangaActions from "../redux/actions/manga";
 import axios from "axios";
 import Button from "/src/components/Button";
 import { Link as Anchor } from "react-router-dom";
+import ModalComment from "../components/ModalComment";
 
 export default function MangaDetail() {
   const { id, page } = useParams();
@@ -40,33 +41,45 @@ export default function MangaDetail() {
 
   let [active, setActive] = useState(false);
 
+  let [isModalOpen, setModalOpen] = useState(false)
+  let [selectedChapterId, setSelectedChapterId] = useState(null)
+
+  let handleOpenModal = (chapterId) => {
+    setModalOpen(true);
+    setSelectedChapterId(chapterId);
+  }
+
+  let handleCloseModal = () => {
+    setModalOpen(false);
+  }
+
   return (
     <div className=" flex flex-col lg:flex-row justify-center items-center  py-20 px-6 bg-gray-100 ">
-      <div className="lg:w-[50vw] lg:flex lg:justify-center lg:items-center min-h-[50vh] ">
-        <img className="" src={manga?.cover_photo} alt="" />
-      </div>
-      <div className="w-full lg:w-[50vw] lg:flex lg:justify-center lg:items-center lg:flex-col min-h-[80vh]  ">
-        <h1 className="text-3xl pt-3 my-3">{manga?.title}</h1>
-        <div className="flex justify-between items-center ">
-          <h2 className="text-rose-400 w-28 h-10 p-2 border rounded-full text-center bg-[#FFE0DF]">
+      <div className="flex flex-col object-cover lg:w-[50vw] lg:flex lg:justify-center lg:items-center min-h-[30vh] ">
+        <img className="rounded-xl" src={manga?.cover_photo} alt="" />
+        <h1 className="text-3xl my-3 self-center">{manga?.title}</h1>
+        <div className="flex w-[80vw] lg:w-[40vw] justify-between items-center">
+          <h2 className="text-rose-400 w-[20vw] lg:w-[10vw] border rounded-full text-center bg-[#FFE0DF]">
             {manga?.category_id.name}
           </h2>
           <h2 className="text-gray-400 text-xl">{manga?.author_id.name}</h2>
         </div>
-        <div className="flex self-center  lg:justify-center lg:items-center my-3 w-16">
-          <img src="/src/assets/images/👍.png" alt="" />
-          <img src="/src/assets/images/👎️.png" alt="" />
-          <img src="/src/assets/images/😮.png" alt="" />
-          <img src="/src/assets/images/😍.png" alt="" />
+      </div>
+      <div className="flex flex-col w-full items-center justify-around lg:w-[50vw] lg:flex lg:justify-center lg:items-center lg:flex-col min-h-[60vh]  ">
+        <div className="flex w-[60vw] lg:w-[30vw] pt-20 justify-around my-3">
+          <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/👍.png" alt="" />
+          <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/👎️.png" alt="" />
+          <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/😮.png" alt="" />
+          <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/😍.png" alt="" />
         </div>
-        <div className="w-72 h-14 border rounded-2xl text-center bg-white flex justify-around ">
-          <div className="flex flex-col">
+        <div className="w-[80vw] lg:w-[40vw] h-14 border rounded-2xl text-center bg-white flex justify-around ">
+          <div className="flex flex-col justify-center">
             <h3>4.5/5</h3>
             <p className="text-gray-400">Rating</p>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-center">
             <h3>265</h3>
-            <p className="text-gray-400">Chapters</p>
+            <p className="text-gray-400 justify-center">Chapters</p>
           </div>
 
           <div className="flex flex-col">
@@ -74,73 +87,43 @@ export default function MangaDetail() {
             <p className="text-gray-400">Language</p>
           </div>
         </div>
-        <div className="text-white my-5 w-72 h-9 rounded-full bg-gray-300 flex justify-around text-center">
-          <button
-            onClick={() => setActive(false)}
-            className={`px-4 w-48 rounded-full ${
-              !active ? "bg-blue-700" : "bg-transparent"
-            }`}
-          >
+        <div className="text-white my-5 w-[80vw] lg:w-[40vw] h-9 rounded-full bg-gray-300 flex justify-around text-center mt-10">
+          <button onClick={() => setActive(false)} className={`px-4 w-[40vw] rounded-full ${!active ? "bg-blue-700" : "bg-transparent"}`}>
             Manga
           </button>
-          <button
-            onClick={() => setActive(true)}
-            className={`px-4 w-48 rounded-full ${
-              active ? "bg-blue-700" : "bg-transparent"
-            }`}
-          >
+          <button onClick={() => setActive(true)} className={`px-4 w-[40vw] rounded-full ${active ? "bg-blue-700" : "bg-transparent"}`}>
             Chapters
           </button>
         </div>
-        {!active ? (
-          <p>{manga?.description}</p>
-        ) : (
-          <div className="w-full flex-col flex gap-4 justify-around my-6 lg:flex lg:flex-wrap">
-            {chapters.map((chapter, index) => (
-              <div
-                className=" flex gap-4 justify-around my-6 lg:flex lg:flex-wrap"
-                key={index}
-              >
-                {" "}
-                <img
-                  src={chapter?.cover_photo}
-                  alt=""
-                  className="hover:focus:placeholder:marker w-20"
-                />
-                <div className="flex gap-4 flex-col">
-                  <h3>{chapter?.title}</h3>
-                  <div className="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
-                      />
-                    </svg>{" "}
-                    <p>{chapter?.number}</p>
+              {!active ? (
+              <p className="font-sans text-justify">{manga?.description}</p>) : (
+                <div className="w-full flex-col flex gap-4 justify-around my-6 lg:flex lg:flex-wrap">
+                  {chapters.map((chapter, index) => (
+                    <div className=" flex gap-4 justify-around my-3 lg:flex lg:flex-wrap" key={index}>
+                      {" "}
+                      <img src={chapter?.cover_photo} alt="" className="hover:focus:placeholder:marker w-[20vw] h-[20vw] lg:w-[10vw] lg:h-[10vw] object-cover"/>
+                      <div className="flex gap-4 flex-col items-center justify-around">
+                        <h3>{chapter?.title}</h3>
+                        <div className="flex ">
+                          <button onClick={() => handleOpenModal(chapter._id)}>
+                            {console.log(chapter?._id)}
+                            <img className="w-[6vw] md:w-[2vw] " src="/src/assets/images/chat.png" alt="chat" />{" "}
+                          </button>
+                          <p>{chapter?.number}</p>
+                        </div>
+                      </div>
+                        <Anchor to={`/chapter/${id}/${chapter._id}/1`} className="text-center w-[15vw] font-bold text-white rounded-full bg-blue-700 h-fit p-3 self-center">
+                          {" "}
+                          Read
+                        </Anchor>
+                      </div>
+                  ))}
+                  <ModalComment isOpen={isModalOpen} onClose={handleCloseModal} chapterId={selectedChapterId} />
+                  <div className="flex justify-center">
+                    <Button />
                   </div>
                 </div>
-                <Anchor
-                  to={`/chapter/${id}/${chapter._id}/1`}
-                  className="text-center font-bold text-white rounded-full bg-blue-700 h-fit p-3"
-                >
-                  {" "}
-                  Read
-                </Anchor>
-              </div>
-            ))}
-            <div className="flex justify-center">
-              <Button />
-            </div>
-          </div>
-        )}
+              )}
       </div>
     </div>
   );

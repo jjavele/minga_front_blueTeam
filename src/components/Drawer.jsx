@@ -21,7 +21,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
   let token = localStorage.getItem("token");
 
   return (
-    <div className="drawer sm:flex text-center sm:text-start min-w-[100%] sm:min-w-[410px] h-[100vh] flex-col sm:items-start gap-[147px] p-6 bg-gradient-to-b  bg-[#4338CA] fixed top-0 left-0 shadow-2xl">
+    <div className="z-10 drawer sm:flex text-center sm:text-start min-w-[100%] sm:min-w-[410px] h-[100vh] flex-col sm:items-start gap-[147px] p-6 bg-gradient-to-b  bg-[#4338CA] fixed top-0 left-0 shadow-2xl">
       <div className="flex h-[525px] flex-col items-center sm:items-start gap-8 self-stretch">
         <div className="flex w-full justify-end">
           <img
