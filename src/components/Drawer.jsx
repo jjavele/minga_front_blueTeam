@@ -81,6 +81,16 @@ export default function Drawer({ isOpen, setIsOpen }) {
                   Profile
                 </p>
               </Anchor>
+              <Anchor to="/admin">
+                <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+                  Adminpanel
+                </p>
+              </Anchor>
+              <Anchor to="/new-role">
+                <p className="p-3  hover:bg-white text-[#fff] hover:text-[#4338CA] w-[250px] sm:w-[400px] rounded-md">
+                  New Role
+                </p>
+              </Anchor>
             </>
           ) : (
             ""

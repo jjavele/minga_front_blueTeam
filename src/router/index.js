@@ -7,5 +7,10 @@ export { default as MangaDetail } from "../pages/MangaDetail"
 export { default as Pages} from "../pages/Pages"
 export { default as Mangas } from "../pages/Mangas"
 export { default as Author } from "../pages/Author"
+export { default as NewRole } from "../pages/NewRole"
+export { default as Authorform } from "../pages/Authorform"
+export { default as Adminpanel } from "../pages/Adminpanel"
+
+
 
 

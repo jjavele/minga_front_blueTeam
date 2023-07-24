@@ -4,9 +4,8 @@ import mangasReducer from './reducers/mangas_news'
 import mangaReducer from './reducers/manga'
 import checkReducer  from "./reducers/mangas";
 import chaptersReducer from "./reducers/chapters";
+import authors from './reducers/authors';
 import commentsReducer from './reducers/comments';
-
-
 
 export const store = configureStore ({
   reducer: {
@@ -15,6 +14,7 @@ export const store = configureStore ({
     mangas: mangasReducer,
     check:checkReducer,
     chapters: chaptersReducer,
+    authors: authors
     comments: commentsReducer,
   }
 })

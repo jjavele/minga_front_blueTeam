@@ -12,6 +12,9 @@ import {
   Mangas,
   MangaDetail,
   Pages,
+  Adminpanel,
+  NewRole,
+  Authorform
 } from "./index";
 
 import Home from "../pages/Home";
@@ -92,6 +95,18 @@ const router = createBrowserRouter([
             <MangaDetail />
           </ProtectectionWhenLogged>
         ),
+      },
+      {
+        path: '/admin',
+        element: <Adminpanel />
+      },
+      {
+        path: '/new-role',
+        element: <NewRole />
+      },
+      {
+        path: '/authorregister',
+        element: <Authorform />
       },
       {
         path: "*",
