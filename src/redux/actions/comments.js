@@ -1,37 +1,88 @@
-import { createAction } from "@reduxjs/toolkit"
+import { createAsyncThunk } from "@reduxjs/toolkit"
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const datos_comments = createAction(
-    'datos_comments',                                         //nombre de la accion
-    (comments) => {                                           //funcion que va a enviar datos al reductor 
-        console.log(comments)                                 //el objeto debe tener todas las propiedades a guardarse en el estado global
-            return {
-                payload: comments
+let headers = ()=> {
+    return {
+        headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
+    }
+}         
 
-            }
+const datos_comments = createAsyncThunk(
+    'datos_comments', async({chapterId, page}) => {
+        console.log(chapterId)
+        console.log(page)
+        try {
+            let { data } = await axios.get(`http://localhost:8080/api/comments?chapter_id=${chapterId}&page=${page}`, headers())
+            console.log(data)
+            console.log(data.comments, data.totalPages, data.prev, data.next)
+            return data.comments
+        } catch (error) {
+            console.log(error)
+            return null
         }
-    )
+    }                                    
+)
 
-const datos_prev = createAction(
-    'datos_prev',                                         //nombre de la accion
-    (prev) => {                                           //funcion que va a enviar datos al reductor 
-        //console.log(prev)                                 //el objeto debe tener todas las propiedades a guardarse en el estado global
-            return {
-                 payload: prev
-                    
-            }
+const post_comment = createAsyncThunk(
+    'post_comment', async({ chapter_id: chapterId, user_id: userId, comment: newComment }) => {
+        try {
+            let post = await axios.post(`http://localhost:8080/api/comments/`, { chapter_id: chapterId, user_id: userId, comment: newComment }, headers())
+            Swal.fire({
+                icon: 'success',
+                title: 'Comment posted!',
+            })
+            return post
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Error posting, try it again',
+            })
+            return null
         }
-    )
-const datos_next = createAction(
-    'datos_next',                                         //nombre de la accion
-    (next) => {                                           //funcion que va a enviar datos al reductor 
-        //console.log(next)                                 //el objeto debe tener todas las propiedades a guardarse en el estado global
-            return {
-                payload: next
-                        
-            }
+    }
+)
+
+const edit_comment = createAsyncThunk(
+    'edit_comment', async({commentId, comment: editedComment}) => {
+        try {
+            await axios.put(`http://localhost:8080/api/comments/${commentId}`, {comment: editedComment }, headers());
+            Swal.fire({
+                icon: 'success',
+                title: 'Comment changed successfully!',
+            })
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error editing, try it again',
+            })
+            return null            
         }
-    )
+    }
+)
+
+const eliminate_comment = createAsyncThunk(
+    'eliminate_comment', async({commentId}) => {
+        try {
+            await axios.delete(`http://localhost:8080/api/comments/${commentId}`, headers());
+            Swal.fire({
+                icon: 'success',
+                title: 'Comment deleted successfully!',
+            });
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'You do not have permission to delete this comment',
+            });
+            return null
+        }
+    }
+)
+
 // el objetivo de la accion es enviar informacion al reductor. 
 // AQUI se realiza TODA la logica necesaria para modificar/reducir los estados globales.
-const commentsActions = { datos_comments, datos_prev, datos_next }
+const commentsActions = { datos_comments, post_comment, edit_comment, eliminate_comment }
 export default commentsActions
