@@ -9,6 +9,7 @@ import {
 import ArrowPage from "../components/Arrow";
 import axios from "axios";
 import Swal from "sweetalert";
+import ModalComment from "../components/ModalComment";
 
 const Page = () => {
   const [chapter, setChapter] = useState([]);
@@ -83,6 +84,18 @@ const Page = () => {
   let iconRight =
     "M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z";
 
+    let [isModalOpen, setModalOpen] = useState(false)
+    let [selectedChapterId, setSelectedChapterId] = useState(null)
+  
+    let handleOpenModal = (chapterId) => {
+      setModalOpen(true);
+      setSelectedChapterId(chapterId);
+    }
+  
+    let handleCloseModal = () => {
+      setModalOpen(false);
+    }
+
   return (
     <div className="h-screen flex flex-col items-center justify-center w-full gap-2">
       <div className="flex gap-1">
@@ -90,7 +103,7 @@ const Page = () => {
         <p className="font-semibold lg:text-xl">- {title}</p>
       </div>
       <div
-        className="h-3/5 md:h-4/5 w-1/2 absolute left-0 cursor-pointer"
+        className="h-3/5 md:h-4/5 w-1/3 absolute left-0 cursor-pointer"
         onClick={() => handleClick("left")}
       />
       <button
@@ -114,9 +127,18 @@ const Page = () => {
         className="h-3/5 md:h-4/5 w-1/2 absolute right-0 cursor-pointer"
         onClick={() => handleClick("right")}
       />
-      <p className="text-center font-semibold lg:text-xl w-6 rounded-xl">
-        {counter + 1}
-      </p>
+      <div className="flex">
+        <button onClick={() => handleOpenModal(chapter._id)}>
+          {console.log(chapter?._id)}
+          <img className="w-[6vw] md:w-[2vw] " src="/src/assets/images/chat.png" alt="chat" />{" "}
+        </button>
+        <p className="text-center font-semibold lg:text-xl w-6 rounded-xl ps-4">
+          {counter + 1}
+        </p>
+        <ModalComment isOpen={isModalOpen} onClose={handleCloseModal} chapterId={selectedChapterId} />
+
+
+      </div>
     </div>
   );
 };
