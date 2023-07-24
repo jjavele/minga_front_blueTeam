@@ -5,6 +5,8 @@ import mangasReducer from './reducers/mangas_news'
 import mangaReducer from './reducers/manga'
 import checkReducer  from "./reducers/mangas";
 import chaptersReducer from "./reducers/chapters";
+import authors from './reducers/authors';
+
 
 
 
@@ -15,6 +17,7 @@ reducer: {
     mangas: mangasReducer,
     check:checkReducer,
     chapters: chaptersReducer,
+    authors: authors
 
 }
 })
