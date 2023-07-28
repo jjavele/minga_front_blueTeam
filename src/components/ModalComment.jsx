@@ -149,14 +149,14 @@ let ModalComment = ({ isOpen, onClose, chapterId, page }) => {
                             <div></div>}
                         </div>
                         <div className="flex items-center pe-2">
-                            <h3 className="text-bold pe-4">{comment?.user_id.email}</h3>
-                            <img className="w-[9vw] md:w-[3vw] rounded-full" src={comment?.user_id.photo} alt="" />
+                            <h3 className="text-bold pe-4">{comment?.user_id?.email}</h3>
+                            <img className="w-[9vw] md:w-[3vw] rounded-full" src={comment?.user_id?.photo} alt="" />
                         </div>
                     </div>  
                     : 
                     <div className="flex items-center p-2">
-                        <img className="w-[9vw] md:w-[3vw] rounded-full" src={comment?.user_id.photo} alt="" />
-                        <h3 className="text-bold ps-4">{comment?.user_id.email}</h3>
+                        <img className="w-[9vw] md:w-[3vw] rounded-full" src={comment?.user_id?.photo} alt="" />
+                        <h3 className="text-bold ps-4">{comment?.user_id?.email}</h3>
                     </div>}        
                     <p className="flex items-center h-[3vh] p-2 pb-2 font-normal">{comment?.comment}</p>
                     <div className="flex items-center ps-4 justify-between  w-[85vw] md:w-[36vw] ">

@@ -14,7 +14,7 @@ export const store = configureStore ({
     mangas: mangasReducer,
     check:checkReducer,
     chapters: chaptersReducer,
-    authors: authors
+    authors: authors,
     comments: commentsReducer,
   }
 })

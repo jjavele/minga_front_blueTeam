@@ -14,7 +14,8 @@ import {
   Pages,
   Adminpanel,
   NewRole,
-  Authorform
+  Authorform,
+  EmailVerification
 } from "./index";
 
 import Home from "../pages/Home";
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: '/authorregister',
         element: <Authorform />
+      },
+      {
+        path: '/mail-verification/:verify_code',
+        element: <EmailVerification />
       },
       {
         path: "*",

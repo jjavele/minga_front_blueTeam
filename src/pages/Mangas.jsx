@@ -3,6 +3,7 @@ import { api, apiUrl, endpoints } from "../utils/api";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import inputActions from "../redux/actions/mangas";
 import { Link as Anchor } from "react-router-dom";
+import { bg } from "date-fns/locale";
 
 export default function Mangas() {
   const store = useStore();
@@ -127,30 +128,22 @@ export default function Mangas() {
   }, [text, checks, page]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[url('/src/assets/images/backgroundmangas.png')] bg-contain bg-no-repeat justify-center">
-      <div className="flex flex-col items-center mt-[15rem]">
+    <div className="flex flex-col md:bg-local min-h-[30vh] bg-top bg-[url('/src/assets/images/backgroundmangas.png')] lg:bg-[url('/src/assets/images/backgroundmangas.png')] lg:bg-contain bg-no-repeat justify-center">
+      <div className="flex flex-col items-center mt-[20vh]">
         <h1 className="text-white text-5xl font-bold">Mangas</h1>
         <br />
         <br />
         <br />
-        <input
-          onKeyUp={(e) => {
-            dispatch(inputActions.changeText(e.target.value));
-            console.log(e.target.value);
-          }}
-          type="search"
-          className="pl-3 h-10 w-1/2 rounded-lg"
-          placeholder="Find your manga here"
-        />
+        <input onKeyUp={(e) => {dispatch(inputActions.changeText(e.target.value));console.log(e.target.value);}} type="search" className="bg-[url('/src/assets/images/search.png')] bg-no-repeat bg-left pl-3 h-[7vh] lgh-10 w-[70vw] lg:w-1/2 rounded-[80px] lg:rounded-lg text-center lg:text-left" placeholder= "Find your manga here"/>
         <br />
         <br />
         <br />
         <br />
-        <div className="min-h-[27rem] w-[90%] bg-white rounded-2xl items-center justify-center text-center mb-[2rem]">
-          <div className="flex h-[6rem] justify-center items-center gap-4">
+        <div className="min-h-[27rem] w-[90vw] bg-white rounded-t-[80px] lg:rounded-t-[16px] items-center justify-center text-center mb-[2rem]">
+          <div className="flex w-[80vw] h-[6rem] justify-center items-center gap-4">
             <button
               onClick={() => resetFilters()}
-              className="py-1 px-4 rounded-full text-white hover:scale-[1.1]"
+              className="py-1 text-[2vw] lg:text-[1vw] px-2 lg:px-4 rounded-full text-white hover:scale-[1.1]"
               style={{
                 borderRadius: "50px",
                 background: "gray",
@@ -160,16 +153,7 @@ export default function Mangas() {
             </button>
 
             {categories.map((category) => (
-              <button
-                key={category._id}
-                onClick={() => dispatchFilters(category._id)}
-                style={{
-                  backgroundColor: checks?.includes(category._id)
-                    ? category.hover
-                    : category.color,
-                }}
-                className="py-1 px-4 rounded-full text-white hover:scale-[1.1]"
-              >
+              <button key={category._id} onClick={() => dispatchFilters(category._id)} style={{backgroundColor: checks?.includes(category._id)? category.hover: category.color,}} className="py-1 px-2 lg:px-4 rounded-full text-white hover:scale-[1.1] text-[2vw]  lg:text-[1vw]">
                 {capitalize(category.name)}
               </button>
             ))}

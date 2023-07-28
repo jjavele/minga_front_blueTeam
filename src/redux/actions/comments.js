@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 let headers = ()=> {
     return {
-        headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
+        headers: { "Authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
     }
 }         
 

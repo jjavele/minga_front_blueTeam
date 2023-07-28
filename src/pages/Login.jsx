@@ -1,14 +1,19 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { api, apiUrl, endpoints } from "../utils/api";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link as Anchor } from "react-router-dom";
+import { gapi } from "gapi-script";
+import GoogleLogin from "react-google-login";
+import axios from "axios";
 
 export default function SignIn() {
+
   let inputEmail = useRef("");
   let inputPassword = useRef("");
+  let navigate = useNavigate();
   console.log(inputEmail);
-  const navigate = useNavigate();
+
   async function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -19,8 +24,8 @@ export default function SignIn() {
 
     try {
       let { data } = await api.post(apiUrl + endpoints.sign_in, datos);
-      const token = data.response?.token;
-      localStorage.setItem("token", data.response?.token);
+      let token = data.response?.token;
+      localStorage.setItem("token", JSON.stringify(data.response?.token));
       localStorage.setItem("user", JSON.stringify(data.response?.user));
 
       Swal.fire({
@@ -30,6 +35,7 @@ export default function SignIn() {
       navigate("/");
       console.log(data);
       console.log(token);
+
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -37,6 +43,55 @@ export default function SignIn() {
         title: error,
       });
     }
+  }
+
+  let clientID = '738973468424-j7rjiq0j4tp1o72uihh9pp65cdbvh2rl.apps.googleusercontent.com'
+
+  useEffect(() => {
+    let start = () => {
+      gapi.auth2.init({
+        clientId: clientID
+      })
+    }
+
+    gapi.load("client:auth2", start)
+  }, [])
+
+  const onSuccess = (response) => {
+    console.log(response)
+    const { email, googleId } = response.profileObj;
+
+    let data = {
+      email: email,
+      password: googleId,
+    }
+    console.log(data)
+    
+    axios.post("http://localhost:8080/api/auth/signin", data)
+      .then(res => {
+        console.log(res)
+        localStorage.setItem('token', JSON.stringify(res.data.response.token));
+        localStorage.setItem('user', JSON.stringify(res.data.response.user));
+
+        Swal.fire({
+          icon: "success",
+          title: "Logged In!",
+        });
+        navigate("/");
+
+      })
+      .catch(error => {
+        // console.log(err)
+        Swal.fire({
+          icon: "error",
+          title: error,
+        });
+      })
+
+  }
+  
+  let onFailure = () => {
+    console.log("something went wrong");
   }
 
   return (
@@ -81,15 +136,18 @@ export default function SignIn() {
                 type="submit"
                 value="Log in"
                 className="cursor-pointer mt-4 w-[25vw] h-[8vh] rounded-lg bg-gradient-to-r from-[#4338CA] to-[#5E52F3] text-white text-center flex items-center justify-center font-bold text-lg"
-              />
+                style={{
+                  boxShadow: "4px 4px 8px rgba(249, 115, 22, 2)",
+                }}/>
             </div>
 
-            <div className=" flex items-center justify-center p-3 mt-4 border-4 w-[25vw] h-[5vh] rounded-lg">
-              <img
-                src="/src/assets/images/Group.png"
-                alt=""
-                className="h-[4vh] "
-              />
+            <div className='flex justify-center w-[25vw]'>
+              <GoogleLogin className="flex space-x-2  w-[25vw] justify-center items-end hover:scale-105 mt-4 border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100"
+                clientId={clientID}
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+                cookiePolicy={"single_host_policy"}
+            />
             </div>
           </form>
           <Anchor to="/register" className="mt-3">

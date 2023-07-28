@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import ButtonForm from "../components/ButtonForm";
 import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import GoogleLogin from "react-google-login";
+import { gapi } from 'gapi-script'
 
 export default function Register() {
 
@@ -38,11 +40,53 @@ export default function Register() {
           });
         });
     }
-    const token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
 
     console.log(data);
     console.log(token);
   }
+
+  let clientID = '738973468424-j7rjiq0j4tp1o72uihh9pp65cdbvh2rl.apps.googleusercontent.com'
+
+  useEffect(() => {
+    let start = () => {
+      gapi.auth2.init({
+        clientId: clientID
+      })
+    }
+
+    gapi.load("client:auth2", start)
+  }, [])
+
+  let onSuccess = (response) => {
+    console.log(response)
+    let { email, imageUrl, googleId } = response.profileObj;
+    let data = {
+      email: email,
+      photo: imageUrl,
+      password: googleId,
+    }
+    axios.post("http://localhost:8080/api/auth/register", data)
+      .then(res => {
+        Swal.fire({
+          icon: "success",
+          title: "User registered successfully!",
+        });
+      })
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
+      })
+
+  }
+
+  let onFailure = () => {
+    console.log("Something went wrong");
+  }
+
+
   return (
     <div className="h-screen w-full flex">
       <div className="h-screen w-[100vw] md:w-[50vw] flex flex-col items-center">
@@ -92,10 +136,19 @@ export default function Register() {
           </label>
         </div>
         <ButtonForm onClick={(e) => handleForm(e)} text="Sign up" />
-        <div className="flex items-center justify-center p-3 my-[20px] border-2 border-black w-[75vw] md:w-[25vw] h-[3rem] rounded-lg">
-          <img src="/src/assets/images/signup.png" alt="" className="h-[4vh]" />
+        <br />
+        <div className='flex justify-center'>
+          <GoogleLogin
+            className="flex  w-[25vw] space-x-2 justify-center items-end hover:scale-105 mt-4 border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100"
+            clientId={clientID}
+            buttonText="Sign up with Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_policy"}
+          />
         </div>
-        <div className="text-center">
+        <br />
+        <div>
         <Link to="/login" className="mt-3">
         Already have an account?{" "}
             <span className="text-blue-500">Log In</span>
