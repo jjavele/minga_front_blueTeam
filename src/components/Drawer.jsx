@@ -31,7 +31,7 @@ export default function Drawer({ isOpen, setIsOpen }) {
           />
         </div>
         <div className="flex flex-row items-center text-center lg:justify-between sm:w-[400px] w-[250px]">
-          <img src={user?.photo} className="w-[50px] mb-2 sm:m-0" />
+          <img src={user?.photo} className="w-[50px] mb-2 sm:m-0 rounded-full" />
           <div className="flex flex-col ms-3">
             <p className="text-[14px] text-[#fff]">{user?.email}</p>
           </div>

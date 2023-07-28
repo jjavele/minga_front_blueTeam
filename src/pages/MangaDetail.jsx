@@ -11,11 +11,11 @@ export default function MangaDetail() {
   const { id, page } = useParams();
   const manga = useSelector((store) => store.manga.manga);
   const chapters = useSelector((store) => store.manga.chapters);
-  console.log(chapters);
+  //console.log(chapters);
   const dispatch = useDispatch();
   let currentPage = Number(page);
 
-  let token = localStorage.getItem("token");
+  let token = JSON.parse(localStorage.getItem("token"));
   let headers = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -55,8 +55,8 @@ export default function MangaDetail() {
 
   return (
     <div className=" flex flex-col lg:flex-row justify-center items-center  py-20 px-6 bg-gray-100 ">
-      <div className="flex flex-col object-cover lg:w-[50vw] lg:flex lg:justify-center lg:items-center min-h-[30vh] ">
-        <img className="rounded-xl" src={manga?.cover_photo} alt="" />
+      <div className="flex flex-col object-cover justify-center lg:w-[50vw] lg:flex lg:justify-center lg:items-center min-h-[40vh] ">
+        <img className="rounded-xl h-[50vh] object-contain" src={manga?.cover_photo} alt="" />
         <h1 className="text-3xl my-3 self-center">{manga?.title}</h1>
         <div className="flex w-[80vw] lg:w-[40vw] justify-between items-center">
           <h2 className="text-rose-400 w-[20vw] lg:w-[10vw] border rounded-full text-center bg-[#FFE0DF]">
@@ -64,9 +64,7 @@ export default function MangaDetail() {
           </h2>
           <h2 className="text-gray-400 text-xl">{manga?.author_id.name}</h2>
         </div>
-      </div>
-      <div className="flex flex-col w-full items-center justify-around lg:w-[50vw] lg:flex lg:justify-center lg:items-center lg:flex-col min-h-[60vh]  ">
-        <div className="flex w-[60vw] lg:w-[30vw] pt-20 justify-around my-3">
+        <div className="flex w-[60vw] lg:w-[30vw] pt-20 justify-around my-3 self-center">
           <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/👍.png" alt="" />
           <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/👎️.png" alt="" />
           <img className="w-[15vw] lg:w-[6vw] " src="/src/assets/images/😮.png" alt="" />
@@ -95,10 +93,12 @@ export default function MangaDetail() {
             Chapters
           </button>
         </div>
+      </div>
+      <div className="flex flex-col w-full items-center justify-around lg:w-[50vw] lg:flex lg:justify-center lg:items-center lg:flex-col min-h-[60vh]  ">
               {!active ? (
-              <p className="font-sans text-justify">{manga?.description}</p>) : (
+              <p className="font-sans text-justify w-[80vw] lg:w-[40vw] ">{manga?.description}</p>) : (
                 <div className="w-full flex-col flex gap-4 justify-around my-6 lg:flex lg:flex-wrap">
-                  {chapters.map((chapter, index) => (
+                  {chapters?.map((chapter, index) => (
                     <div className=" flex gap-4 justify-around my-3 lg:flex lg:flex-wrap" key={index}>
                       {" "}
                       <img src={chapter?.cover_photo} alt="" className="hover:focus:placeholder:marker w-[20vw] h-[20vw] lg:w-[10vw] lg:h-[10vw] object-cover"/>

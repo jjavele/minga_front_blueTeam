@@ -10,6 +10,7 @@ export { default as Author } from "../pages/Author"
 export { default as NewRole } from "../pages/NewRole"
 export { default as Authorform } from "../pages/Authorform"
 export { default as Adminpanel } from "../pages/Adminpanel"
+export { default as EmailVerification } from "../pages/EmailVerification"
 
 
 

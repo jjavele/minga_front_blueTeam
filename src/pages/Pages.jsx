@@ -21,7 +21,7 @@ const Page = () => {
   const nextChapterId = useSelector((state) => state.chapters.nextChapterId);
   const number = useSelector((state) => state.chapters.number);
   const { title } = useSelector((state) => state.chapters);
-  const [counter, setCounter] = useState(pageCounter);
+  const [counter, setCounter] = useState(1);
 
   useEffect(() => {
     console.log(nextChapterId);
@@ -48,7 +48,7 @@ const Page = () => {
   }, []);
 
   const navigateToDetailPage = () => {
-    navigate(`/chapter/${id}/detail`);
+    navigate(`/chapter/${id}/`);
   };
 
   const navigateToNextChapter = () => {
@@ -102,43 +102,25 @@ const Page = () => {
         <p className="font-semibold lg:text-xl">Cap n° {number}</p>
         <p className="font-semibold lg:text-xl">- {title}</p>
       </div>
-      <div
-        className="h-3/5 md:h-4/5 w-1/3 absolute left-0 cursor-pointer"
-        onClick={() => handleClick("left")}
-      />
-      <button
-        className="button absolute left-2"
-        onClick={() => handleClick("left")}
-      >
-        <ArrowPage icon={iconLeft} alt="Previous" />
-      </button>
-      <img
-        className="h-3/5 w-screen md:h-3/4 md:w-4/5 lg:h-2/3"
-        src={chapter.pages && chapter.pages[counter]}
-        alt="image page"
-      />
-      <button
-        className="button absolute right-2"
-        onClick={() => handleClick("right")}
-      >
-        <ArrowPage icon={iconRight} alt="Next" />
-      </button>
-      <div
-        className="h-3/5 md:h-4/5 w-1/2 absolute right-0 cursor-pointer"
-        onClick={() => handleClick("right")}
-      />
-      <div className="flex">
-        <button onClick={() => handleOpenModal(chapter._id)}>
-          {console.log(chapter?._id)}
-          <img className="w-[6vw] md:w-[2vw] " src="/src/assets/images/chat.png" alt="chat" />{" "}
+      <div className="h-3/5 md:h-4/5 w-1/3 absolute left-0 cursor-pointer" onClick={() => handleClick("left")}/>
+        <button className="button absolute left-2" onClick={() => handleClick("left")}>
+          <ArrowPage icon={iconLeft} alt="Previous" />
         </button>
-        <p className="text-center font-semibold lg:text-xl w-6 rounded-xl ps-4">
-          {counter + 1}
-        </p>
-        <ModalComment isOpen={isModalOpen} onClose={handleCloseModal} chapterId={selectedChapterId} />
-
-
-      </div>
+        <img className="h-[80vh] object-contain" src={chapter.pages && chapter.pages[pageCounter]} alt="image page"/>
+        <button className="button absolute right-2" onClick={() => handleClick("right")}>
+          <ArrowPage icon={iconRight} alt="Next" />
+        </button>
+      <div className="h-3/5 md:h-4/5 w-1/2 absolute right-0 cursor-pointer" onClick={() => handleClick("right")}/>
+        <div className="flex">
+          <button onClick={() => handleOpenModal(chapter._id)}>
+            {console.log(chapter?._id)}
+            <img className="w-[6vw] md:w-[2vw] " src="/src/assets/images/chat.png" alt="chat" />{" "}
+          </button>
+          <p className="text-center font-semibold lg:text-xl w-6 rounded-xl ps-4">
+            {pageCounter}
+          </p>
+          <ModalComment isOpen={isModalOpen} onClose={handleCloseModal} chapterId={selectedChapterId} />
+        </div>
     </div>
   );
 };
